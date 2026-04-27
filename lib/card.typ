@@ -8,7 +8,7 @@
     scale: none,
     linkVal: none,
     linkMarkers: none,
-    cardTyype: "monster",
+    cardType: "monster",
     attribute: "earth",
     race: none,
     atk: 5000,
@@ -23,12 +23,12 @@
     ),
     cardImage: 23288411,
     assets: (
-        path: "../assets/",
-        font: (
-            SC: "Yu-Gi-Oh! DFKaiW5-A",
-            ATK-DEF: "Yu-Gi-Oh! ITC Stone Serif M",
-            LINK: "Yu-Gi-Oh! Matrix",
-            PASSWD-NO: "Yu-Gi-Oh! Ro GSan Serif Std B",
+        path: none,
+        fonts: (
+            SC: none,
+            ATK-DEF: none,
+            LINK: none,
+            PASSWD-NO: none,
         ),
         cardImage: none,
         arrows: (
@@ -41,20 +41,40 @@
             top: none,
             top-right: none,
         ),
-        attibutes: none,
-        cards: none,
-        icons: none,
-        indicators: none,
+        attribute: none,
+        card: none,
+        icon: none,
+        indicator: none,
     ),
 ) = {
     // Assert some info here.
     assert(cardImage != none or assets.cardImage != none, message: "card image is required.")
-    assert(frameType != none or assets.cards != none, message: "card frame is required.")
-    assert(attribute != none or assets.attibutes != none, message: "attribute icon is required.")
+    assert(frameType != none or assets.card != none, message: "card frame is required.")
+    assert(attribute != none or assets.attribute != none, message: "attribute icon is required.")
+    assert(
+        cardType == _card_type.monster
+            or ((cardType == _card_type.spell or cardType == _card_type.trap) and race != none),
+        message: "spell and trap card must have a race.",
+    )
+    assert(name != none, message: "card name is required.")
+
+    let assetsPath = if assets.path != none { assets.path } else { "../assets/" }
+    let fonts = (
+        SC: if assets.fonts.SC != none { assets.fonts.SC } else { "Yu-Gi-Oh! DFKaiW5-A" },
+        ATK-DEF: if assets.fonts.ATK-DEF != none { assets.fonts.ATK-DEF } else { "Yu-Gi-Oh! ITC Stone Serif M" },
+        LINK: if assets.fonts.LINK != none { assets.fonts.LINK } else { "Yu-Gi-Oh! Matrix" },
+        PASSWD-NO: if assets.fonts.PASSWD-NO != none { assets.fonts.PASSWD-NO } else {
+            "Yu-Gi-Oh! Ro GSan Serif Std B"
+        },
+    )
+
     // Divide the card types.
-    let isXyz = frameType.contains("xyz")
-    let isLink = frameType.contains("link")
-    let isPendulum = frameType.contains("pendulum")
+    let isMonster = cardType == _card_type.monster
+    let isSpell = cardType == _card_type.spell
+    let isTrap = cardType == _card_type.trap
+    let isXyz = isMonster and frameType.contains(_card_hint.xyz)
+    let isLink = isMonster and frameType.contains(_card_hint.link)
+    let isPendulum = isMonster and frameType.contains(_card_hint.pendulum)
 
     // Image and frame.
     let png-size(path) = {
@@ -86,36 +106,55 @@
     let cardImagePath = if (assets.cardImage != none) {
         assets.cardImage
     } else {
-        assets.path + "images/" + str(cardImage) + ".png"
+        assetsPath + "images/" + str(cardImage) + ".png"
     }
-    let frameImagePath = if (assets.cards != none) {
-        assets.cards
+    let frameImagePath = if (assets.card != none) {
+        assets.card
     } else {
-        assets.path + "figure/cards/card-" + frameType + ".png"
+        assetsPath + "figure/cards/card-" + frameType + ".png"
+    }
+
+    // Attributes.
+    let attributeIconPath = if assets.attribute != none { assets.attribute } else {
+        assetsPath + "figure/attributes/attribute-" + attribute + ".png"
     }
     set page(
         width: _card_width,
         height: _card_height,
         margin: 0pt,
-        foreground: {
-            place(
-                dx: if isPendulum { _image.pos.pendulum.x } else { _image.pos.normal.x },
-                dy: if isPendulum { _image.pos.pendulum.y } else { _image.pos.normal.y },
-                card-image(cardImagePath),
-            )
-            place(
-                dx: 0pt,
-                dy: 0pt,
-                frame-image(frameImagePath),
-            )
-        },
     )
-
-    // Attributes.
-    let attributeIcon = if assets.attibutes != none { image(assets.attibutes) } else {
-        image(
-            assets.path + "figure/attributes/attribute-" + attribute + ".png",
-        )
-    }
+    // foreground: {
+    place(
+        dx: if isPendulum { _image.pos.pendulum.x } else { _image.pos.normal.x },
+        dy: if isPendulum { _image.pos.pendulum.y } else { _image.pos.normal.y },
+        card-image(cardImagePath),
+    )
+    place(
+        dx: 0pt,
+        dy: 0pt,
+        frame-image(frameImagePath),
+    )
+    place(
+        dx: _attribute_pos.x,
+        dy: _attribute_pos.y,
+        image(attributeIconPath),
+    )
+    place(
+        dx: _name_area.st.x,
+        dy: _name_area.st.y,
+        box(
+            width: _name_area.ed.x - _name_area.st.x,
+            height: _name_area.ed.y - _name_area.st.y,
+            stroke: .1em,
+            // baseline: -40%,
+            // inset:(3pt),
+            {
+                set text(font: fonts.SC, size: 10pt, fill: if isSpell or isTrap or isXyz { white } else { black })
+                name
+            },
+        ),
+    )
+    // },
+    // )
 }
 
