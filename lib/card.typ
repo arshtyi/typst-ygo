@@ -48,17 +48,6 @@
         indicator: none,
     ),
 ) = {
-    // Assert some info here.
-    assert(cardImage != none or assets.cardImage != none, message: "card image is required.")
-    assert(frameType != none or assets.card != none, message: "card frame is required.")
-    assert(attribute != none or assets.attribute != none, message: "attribute icon is required.")
-    assert(
-        cardType == _card_type.monster
-            or ((cardType == _card_type.spell or cardType == _card_type.trap) and race != none),
-        message: "spell and trap card must have a race.",
-    )
-    assert(name != none, message: "card name is required.")
-
     let assetsPath = if assets.path != none { assets.path } else { "../assets/" }
     let fonts = (
         SC: if assets.fonts.SC != none { assets.fonts.SC } else { "Yu-Gi-Oh! DFKaiW5-A" },
@@ -187,5 +176,23 @@
             ),
         )
     }
+    place(
+        dx: _passwd_pos.x,
+        dy: _passwd_pos.y,
+        block(
+            width: 32pt,
+            height: 10pt,
+            // stroke: .1pt,
+            {
+                set align(left + horizon)
+                set text(font: fonts.PASSWD-NO, size: 6pt, fill: black)
+                if str(id).len() < 8 {
+                    "0" * (8 - str(id).len()) + str(id)
+                } else {
+                    str(id)
+                }
+            },
+        ),
+    )
 }
 

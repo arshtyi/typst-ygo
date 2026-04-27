@@ -26,7 +26,11 @@
         left: 100,
         right: 1202,
     ),
-    y: 1370,
+    y: 1386,
+)
+#let _passwd_pos = (
+    x: 60,
+    y: 1910,
 )
 #let _ppi_in_ps_ = 600
 
@@ -84,6 +88,10 @@
         right: _convert(_scale_area_in_ps.x.right),
     ),
     y: _convert(_scale_area_in_ps.y),
+)
+#let _passwd_pos = (
+    x: _convert(_passwd_pos.x),
+    y: _convert(_passwd_pos.y),
 )
 #let _ppi = _ppi_in_ps_
 
