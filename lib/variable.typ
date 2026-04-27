@@ -85,6 +85,14 @@
     bottom: (x: 572, y: 1428),
     bottom-right: (x: 1149, y: 1352),
 )
+#let _pendulum_description_area_in_ps = (
+    st: (x: 210, y: 1285),
+    ed: (x: 1180, y: 1495),
+)
+#let _description_area_in_ps = (
+    st: (x: 104, y: 1530),
+    ed: (x: 1290, y: 1836),
+)
 #let _ppi_in_ps_ = 600
 
 // The unit in typst is 1/72 inch.
@@ -224,6 +232,26 @@
     bottom-right: (
         x: _convert(_link_markers_pos_in_ps.bottom-right.x),
         y: _convert(_link_markers_pos_in_ps.bottom-right.y),
+    ),
+)
+#let _pendulum_description_area = (
+    st: (
+        x: _convert(_pendulum_description_area_in_ps.st.x),
+        y: _convert(_pendulum_description_area_in_ps.st.y),
+    ),
+    ed: (
+        x: _convert(_pendulum_description_area_in_ps.ed.x),
+        y: _convert(_pendulum_description_area_in_ps.ed.y),
+    ),
+)
+#let _description_area = (
+    st: (
+        x: _convert(_description_area_in_ps.st.x),
+        y: _convert(_description_area_in_ps.st.y),
+    ),
+    ed: (
+        x: _convert(_description_area_in_ps.ed.x),
+        y: _convert(_description_area_in_ps.ed.y),
     ),
 )
 #let _ppi = _ppi_in_ps_

@@ -1,5 +1,6 @@
 #import "variable.typ": *
 #import "one-line.typ": squeeze-to-width
+#import "one-block.typ": fit-to-box
 
 #let card(
     name: "冥骸合龙-莫忘冥地王灵",
@@ -186,6 +187,21 @@
                     set align(center + horizon)
                     set text(font: fonts.ATK-DEF-SCALE, size: 10pt, fill: black)
                     str(scale)
+                },
+            ),
+        )
+        place(
+            dx: _pendulum_description_area.st.x,
+            dy: _pendulum_description_area.st.y,
+            block(
+                width: _pendulum_description_area.ed.x - _pendulum_description_area.st.x,
+                height: _pendulum_description_area.ed.y - _pendulum_description_area.st.y,
+                // stroke: .1pt,
+                inset: (x: 1pt, y: 1pt),
+                {
+                    set align(left)
+                    set text(font: fonts.SC, size: 10pt, fill: black)
+                    fit-to-box(pendulumDescription)
                 },
             ),
         )
@@ -386,4 +402,19 @@
             )
         }
     }
+    place(
+        dx: _description_area.st.x,
+        dy: _description_area.st.y,
+        block(
+            width: _description_area.ed.x - _description_area.st.x,
+            height: _description_area.ed.y - _description_area.st.y,
+            // stroke: .1pt,
+            inset: (x: 1pt, y: 1pt),
+            {
+                set align(left)
+                set text(font: fonts.SC, size: 9pt, fill: black)
+                fit-to-box(description)
+            },
+        ),
+    )
 }
