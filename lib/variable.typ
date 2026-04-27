@@ -59,6 +59,22 @@
     ),
     y: 249,
 )
+#let _bar_pos_in_ps = (
+    x: 106,
+    y: 1848,
+)
+#let _atk_pos_in_ps = (
+    x: 870,
+    y: 1856,
+)
+#let _def_pos_in_ps = (
+    x: 1160,
+    y: 1856,
+)
+#let _link_val_pos_in_ps = (
+    x: 1222,
+    y: 1856,
+)
 #let _ppi_in_ps_ = 600
 
 // The unit in typst is 1/72 inch.
@@ -149,6 +165,22 @@
         ),
     ),
     y: _convert(_star_pos_in_ps.y),
+)
+#let _bar_pos = (
+    x: _convert(_bar_pos_in_ps.x),
+    y: _convert(_bar_pos_in_ps.y),
+)
+#let _atk_pos = (
+    x: _convert(_atk_pos_in_ps.x),
+    y: _convert(_atk_pos_in_ps.y),
+)
+#let _def_pos = (
+    x: _convert(_def_pos_in_ps.x),
+    y: _convert(_def_pos_in_ps.y),
+)
+#let _link_val_pos = (
+    x: _convert(_link_val_pos_in_ps.x),
+    y: _convert(_link_val_pos_in_ps.y),
 )
 #let _ppi = _ppi_in_ps_
 

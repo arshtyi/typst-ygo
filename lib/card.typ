@@ -231,44 +231,125 @@
         )
     }
     if isMonster {
-        let starPath = if { if isXyz { assets.indicators.rank } else { assets.indicators.level } } != none {
-            if isXyz {
-                assets.indicators.rank
+        if not isLink {
+            let starPath = if { if isXyz { assets.indicators.rank } else { assets.indicators.level } } != none {
+                if isXyz {
+                    assets.indicators.rank
+                } else {
+                    assets.indicators.level
+                }
             } else {
-                assets.indicators.level
+                assetsPath + "figure/indicators/" + if isXyz { "rank" } else { "level" } + ".png"
             }
-        } else {
-            assetsPath + "figure/indicators/" + if isXyz { "rank" } else { "level" } + ".png"
+            if level <= 12 {
+                if isXyz {
+                    for pos in range(level) {
+                        place(
+                            dx: _star_pos.x.lt_twelve.at(pos),
+                            dy: _star_pos.y,
+                            image(starPath),
+                        )
+                    }
+                } else {
+                    for pos in range(level) {
+                        place(
+                            dx: _star_pos.x.lt_twelve.at(11 - pos),
+                            dy: _star_pos.y,
+                            image(starPath),
+                        )
+                    }
+                }
+            } else {
+                let width = _star_pos.x.gt_twelve.ed - _star_pos.x.gt_twelve.st
+                let step = width / (13 - 1) - 0.72pt
+                for pos in range(13) {
+                    place(
+                        dx: _star_pos.x.gt_twelve.st + step * pos,
+                        dy: _star_pos.y,
+                        image(starPath),
+                    )
+                }
+            }
         }
-
-        if level <= 12 {
-            if isXyz {
-                for pos in range(level) {
-                    place(
-                        dx: _star_pos.x.lt_twelve.at(pos),
-                        dy: _star_pos.y,
-                        image(starPath),
-                    )
-                }
+        let barPath = if { if isLink { assets.indicators.atk-link } else { assets.indicators.atk-def } } != none {
+            if isLink {
+                assets.indicators.atk-link
             } else {
-                for pos in range(level) {
-                    place(
-                        dx: _star_pos.x.lt_twelve.at(11 - pos),
-                        dy: _star_pos.y,
-                        image(starPath),
-                    )
-                }
+                assets.indicators.atk-def
             }
         } else {
-            let width = _star_pos.x.gt_twelve.ed - _star_pos.x.gt_twelve.st
-            let step = width / (13 - 1) - 0.72pt
-            for pos in range(13) {
-                place(
-                    dx: _star_pos.x.gt_twelve.st + step * pos,
-                    dy: _star_pos.y,
-                    image(starPath),
-                )
-            }
+            assetsPath + "figure/indicators/" + if isLink { "atk-link" } else { "atk-def" } + ".png"
+        }
+        place(
+            dx: _bar_pos.x,
+            dy: _bar_pos.y,
+            image(barPath),
+        )
+        place(
+            dx: _atk_pos.x,
+            dy: _atk_pos.y,
+            block(
+                width: 15pt,
+                height: 6pt,
+                // stroke: .1pt,
+                inset: (x: 1pt, y: 1pt),
+                {
+                    set align(right + horizon)
+                    set text(font: fonts.ATK-DEF-SCALE, size: 7pt, fill: black)
+                    let atk = if atk == -1 {
+                        "   ?"
+                    } else {
+                        if str(atk).len() < 4 {
+                            " " * (4 - str(atk).len()) + str(atk)
+                        } else {
+                            str(atk)
+                        }
+                    }
+                    str(atk)
+                },
+            ),
+        )
+        if isLink {
+            place(
+                dx: _link_val_pos.x,
+                dy: _link_val_pos.y,
+                block(
+                    width: 6pt,
+                    height: 6pt,
+                    // stroke: .1pt,
+                    inset: (x: 1pt, y: 1pt),
+                    {
+                        set align(center + horizon)
+                        set text(font: fonts.LINK, size: 5.2pt, fill: black)
+                        str(linkVal)
+                    },
+                ),
+            )
+        } else {
+            place(
+                dx: _def_pos.x,
+                dy: _def_pos.y,
+                block(
+                    width: 15pt,
+                    height: 6pt,
+                    // stroke: .1pt,
+                    inset: (x: 1pt, y: 1pt),
+                    {
+                        set align(right + horizon)
+                        set text(font: fonts.ATK-DEF-SCALE, size: 7pt, fill: black)
+                        let def = if def == -1 {
+                            "   ?"
+                        } else {
+                            if str(def).len() < 4 {
+                                " " * (4 - str(def).len()) + str(def)
+                            } else {
+                                str(def)
+                            }
+                        }
+                        str(def)
+                    },
+                ),
+            )
         }
     }
 }
