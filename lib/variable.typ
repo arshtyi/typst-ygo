@@ -18,8 +18,8 @@
     y: 96,
 )
 #let _name_area_in_ps = (
-    st: (x: 110, y: 100),
-    ed: (x: 1120, y: 225),
+    st: (x: 100, y: 100),
+    ed: (x: 1160, y: 225),
 )
 #let _ppi_in_ps_ = 600
 

@@ -1,4 +1,5 @@
 #import "variable.typ": *
+#import "one-line.typ": squeeze-to-width
 
 #let card(
     name: "冥骸合龙-莫忘冥地王灵",
@@ -123,7 +124,7 @@
         height: _card_height,
         margin: 0pt,
     )
-    // foreground: {
+    set par(justify: true)
     place(
         dx: if isPendulum { _image.pos.pendulum.x } else { _image.pos.normal.x },
         dy: if isPendulum { _image.pos.pendulum.y } else { _image.pos.normal.y },
@@ -142,19 +143,17 @@
     place(
         dx: _name_area.st.x,
         dy: _name_area.st.y,
-        box(
+        block(
             width: _name_area.ed.x - _name_area.st.x,
             height: _name_area.ed.y - _name_area.st.y,
-            stroke: .1em,
-            // baseline: -40%,
-            // inset:(3pt),
+            // stroke: .1pt,
+            inset: (x: 1pt, y: 3pt),
             {
-                set text(font: fonts.SC, size: 10pt, fill: if isSpell or isTrap or isXyz { white } else { black })
-                name
+                set align(left + horizon)
+                set text(font: fonts.SC, size: 10pt, fill: if isXyz or isSpell or isTrap { white } else { black })
+                squeeze-to-width(min-x-scale: 50%, name)
             },
         ),
     )
-    // },
-    // )
 }
 
