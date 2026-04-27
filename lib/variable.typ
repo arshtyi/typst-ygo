@@ -75,6 +75,16 @@
     x: 1222,
     y: 1856,
 )
+#let _link_markers_pos_in_ps = (
+    top-left: (x: 117, y: 321),
+    top: (x: 569, y: 298),
+    top-right: (x: 1149, y: 321),
+    left: (x: 93, y: 773),
+    right: (x: 1223, y: 773),
+    bottom-left: (x: 117, y: 1352),
+    bottom: (x: 572, y: 1428),
+    bottom-right: (x: 1149, y: 1352),
+)
 #let _ppi_in_ps_ = 600
 
 // The unit in typst is 1/72 inch.
@@ -181,6 +191,40 @@
 #let _link_val_pos = (
     x: _convert(_link_val_pos_in_ps.x),
     y: _convert(_link_val_pos_in_ps.y),
+)
+#let _link_markers_pos = (
+    top-left: (
+        x: _convert(_link_markers_pos_in_ps.top-left.x),
+        y: _convert(_link_markers_pos_in_ps.top-left.y),
+    ),
+    top: (
+        x: _convert(_link_markers_pos_in_ps.top.x),
+        y: _convert(_link_markers_pos_in_ps.top.y),
+    ),
+    top-right: (
+        x: _convert(_link_markers_pos_in_ps.top-right.x),
+        y: _convert(_link_markers_pos_in_ps.top-right.y),
+    ),
+    left: (
+        x: _convert(_link_markers_pos_in_ps.left.x),
+        y: _convert(_link_markers_pos_in_ps.left.y),
+    ),
+    right: (
+        x: _convert(_link_markers_pos_in_ps.right.x),
+        y: _convert(_link_markers_pos_in_ps.right.y),
+    ),
+    bottom-left: (
+        x: _convert(_link_markers_pos_in_ps.bottom-left.x),
+        y: _convert(_link_markers_pos_in_ps.bottom-left.y),
+    ),
+    bottom: (
+        x: _convert(_link_markers_pos_in_ps.bottom.x),
+        y: _convert(_link_markers_pos_in_ps.bottom.y),
+    ),
+    bottom-right: (
+        x: _convert(_link_markers_pos_in_ps.bottom-right.x),
+        y: _convert(_link_markers_pos_in_ps.bottom-right.y),
+    ),
 )
 #let _ppi = _ppi_in_ps_
 

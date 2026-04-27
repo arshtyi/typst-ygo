@@ -8,7 +8,16 @@
     pendulumDescription: none,
     scale: none,
     linkVal: none,
-    linkMarkers: none,
+    linkMarkers: (
+        top-left: none,
+        top: none,
+        top-right: none,
+        left: none,
+        right: none,
+        bottom-left: none,
+        bottom: none,
+        bottom-right: none,
+    ),
     cardType: "monster",
     attribute: "earth",
     race: none,
@@ -231,7 +240,32 @@
         )
     }
     if isMonster {
-        if not isLink {
+        if isLink {
+            let linkMarkerPos = (
+                "top-left",
+                "top",
+                "top-right",
+                "left",
+                "right",
+                "bottom-left",
+                "bottom",
+                "bottom-right",
+            )
+            for marker in linkMarkerPos {
+                if linkMarkers.at(marker, default: none) != none {
+                    let markerPath = if assets.arrows.at(marker) != none {
+                        assets.arrows.at(marker)
+                    } else {
+                        assetsPath + "figure/arrows/arrow-" + marker + ".png"
+                    }
+                    place(
+                        dx: _link_markers_pos.at(marker).x,
+                        dy: _link_markers_pos.at(marker).y,
+                        image(markerPath),
+                    )
+                }
+            }
+        } else {
             let starPath = if { if isXyz { assets.indicators.rank } else { assets.indicators.level } } != none {
                 if isXyz {
                     assets.indicators.rank
