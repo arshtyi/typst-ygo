@@ -28,9 +28,36 @@
     ),
     y: 1386,
 )
-#let _passwd_pos = (
+#let _passwd_pos_in_ps = (
     x: 60,
     y: 1910,
+)
+#let _race_pos_in_ps = (
+    x: (hasIcon: 850, noIcon: 890),
+    y: 245,
+)
+#let _star_pos_in_ps = (
+    x: (
+        lt_twelve: (
+            148,
+            238,
+            332,
+            424,
+            515,
+            608,
+            700,
+            791,
+            884,
+            976,
+            1067,
+            1160,
+        ),
+        gt_twelve: (
+            st: 100,
+            ed: 1280,
+        ),
+    ),
+    y: 249,
 )
 #let _ppi_in_ps_ = 600
 
@@ -90,8 +117,38 @@
     y: _convert(_scale_area_in_ps.y),
 )
 #let _passwd_pos = (
-    x: _convert(_passwd_pos.x),
-    y: _convert(_passwd_pos.y),
+    x: _convert(_passwd_pos_in_ps.x),
+    y: _convert(_passwd_pos_in_ps.y),
+)
+#let _race_pos = (
+    x: (
+        hasIcon: _convert(_race_pos_in_ps.x.hasIcon),
+        noIcon: _convert(_race_pos_in_ps.x.noIcon),
+    ),
+    y: _convert(_race_pos_in_ps.y),
+)
+#let _star_pos = (
+    x: (
+        lt_twelve: (
+            _convert(_star_pos_in_ps.x.lt_twelve.at(0)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(1)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(2)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(3)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(4)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(5)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(6)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(7)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(8)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(9)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(10)),
+            _convert(_star_pos_in_ps.x.lt_twelve.at(11)),
+        ),
+        gt_twelve: (
+            st: _convert(_star_pos_in_ps.x.gt_twelve.st),
+            ed: _convert(_star_pos_in_ps.x.gt_twelve.ed),
+        ),
+    ),
+    y: _convert(_star_pos_in_ps.y),
 )
 #let _ppi = _ppi_in_ps_
 

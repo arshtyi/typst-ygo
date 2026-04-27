@@ -27,3 +27,14 @@
     typeline: "【幻龙族/特殊召唤/效果】",
     cardImage: 23288411,
 )
+#card(
+    name: "时空转生",
+    id: 8038143,
+    description: "自己场上有「银河眼时空龙」怪兽存在的场合，这张卡的发动从手卡也能用。\n①：自己场上有「银河眼」怪兽存在的场合，连锁2以后才能发动。这张卡的发动时积累的连锁上的全部对方的怪兽的效果·魔法·陷阱卡的发动无效，用这个效果把发动无效的卡在场上存在的场合，那些全部回到卡组。",
+    cardType: "trap",
+    // race: "normal",
+    race: "counter",
+    frameType: "trap",
+    cardImage: 8038143,
+    attribute: "trap",
+)

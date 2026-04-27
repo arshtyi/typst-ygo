@@ -45,7 +45,12 @@
         attribute: none,
         card: none,
         icon: none,
-        indicator: none,
+        indicators: (
+            atk-def: none,
+            atk-link: none,
+            level: none,
+            rank: none,
+        ),
     ),
 ) = {
     let assetsPath = if assets.path != none { assets.path } else { "../assets/" }
@@ -194,5 +199,76 @@
             },
         ),
     )
-}
+    if isSpell or isTrap {
+        let hasIcon = not (race == _frame_type.spell.normal or race == _frame_type.trap.normal)
+        place(
+            dx: if hasIcon { _race_pos.x.hasIcon } else { _race_pos.x.noIcon },
+            dy: _race_pos.y,
+            block(
+                width: if hasIcon { 50pt } else { 45pt },
+                height: 12pt,
+                inset: (x: 1pt, y: 2pt),
+                // stroke: .1pt,
+                {
+                    set align(right + horizon)
+                    set text(font: fonts.PASSWD-NO, size: 10pt, fill: black)
+                    if isSpell {
+                        "【魔法卡"
+                    } else {
+                        "【陷阱卡"
+                    }
+                    if hasIcon {
+                        let iconPath = if assets.icon != none {
+                            assets.icon
+                        } else {
+                            assetsPath + "figure/icons/icon-" + race + ".png"
+                        }
+                        box(image(iconPath, scaling: "pixelated"))
+                    }
+                    str("】")
+                },
+            ),
+        )
+    }
+    if isMonster {
+        let starPath = if { if isXyz { assets.indicators.rank } else { assets.indicators.level } } != none {
+            if isXyz {
+                assets.indicators.rank
+            } else {
+                assets.indicators.level
+            }
+        } else {
+            assetsPath + "figure/indicators/" + if isXyz { "rank" } else { "level" } + ".png"
+        }
 
+        if level <= 12 {
+            if isXyz {
+                for pos in range(level) {
+                    place(
+                        dx: _star_pos.x.lt_twelve.at(pos),
+                        dy: _star_pos.y,
+                        image(starPath),
+                    )
+                }
+            } else {
+                for pos in range(level) {
+                    place(
+                        dx: _star_pos.x.lt_twelve.at(11 - pos),
+                        dy: _star_pos.y,
+                        image(starPath),
+                    )
+                }
+            }
+        } else {
+            let width = _star_pos.x.gt_twelve.ed - _star_pos.x.gt_twelve.st
+            let step = width / (13 - 1) - 0.72pt
+            for pos in range(13) {
+                place(
+                    dx: _star_pos.x.gt_twelve.st + step * pos,
+                    dy: _star_pos.y,
+                    image(starPath),
+                )
+            }
+        }
+    }
+}
