@@ -8,7 +8,7 @@ This template can be used to create a Yu-Gi-Oh! card using [Typst](https://typst
 - Simplified Chinese Only, so far.
 - Sold cards Only.
 - No DIY.
-- This template may not update very frequently, because Yu-Gi-Oh! cards template(not on web) is very hard to make, and is not stable.So I will only update it when I have time and motivation, and I will not promise any update schedule.
+- This template may not update very frequently, because Yu-Gi-Oh! cards template(not on web) is very hard to make, and is not stable. So I will only update it when I have time and motivation, and I will not promise any update schedule. And not all problems will be solved, because there will not be any problem if every action is legal.
 
 ## Examples
 
@@ -29,7 +29,7 @@ You can check the [arshtyi/YuGiOh-Cards-Asset](https://github.com/arshtyi/YuGiOh
 
 ### Quick Start
 
-Assumping you have the resource files in [assets](#assets) and write in the directory `template`:
+Assuming you have the resource files in [assets](#assets) and write in the directory `template`:
 
 ```typ
 #import "../lib/card.typ": card
