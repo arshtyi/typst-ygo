@@ -21,12 +21,19 @@
     st: (x: 100, y: 100),
     ed: (x: 1160, y: 225),
 )
+#let _scale_area_in_ps = (
+    x: (
+        left: 100,
+        right: 1202,
+    ),
+    y: 1370,
+)
 #let _ppi_in_ps_ = 600
 
 // The unit in typst is 1/72 inch.
 #let _convert(data) = {
-    let _unit = 71pt
-    data / _ppi_in_ps_ * _unit
+    let _unit = 72pt
+    data * _unit / _ppi_in_ps_
 }
 
 /**
@@ -70,6 +77,13 @@
         x: _convert(_name_area_in_ps.ed.x),
         y: _convert(_name_area_in_ps.ed.y),
     ),
+)
+#let _scale_area = (
+    x: (
+        left: _convert(_scale_area_in_ps.x.left),
+        right: _convert(_scale_area_in_ps.x.right),
+    ),
+    y: _convert(_scale_area_in_ps.y),
 )
 #let _ppi = _ppi_in_ps_
 

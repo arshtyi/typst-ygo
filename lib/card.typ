@@ -27,7 +27,7 @@
         path: none,
         fonts: (
             SC: none,
-            ATK-DEF: none,
+            ATK-DEF-SCALE: none,
             LINK: none,
             PASSWD-NO: none,
         ),
@@ -62,10 +62,10 @@
     let assetsPath = if assets.path != none { assets.path } else { "../assets/" }
     let fonts = (
         SC: if assets.fonts.SC != none { assets.fonts.SC } else { "Yu-Gi-Oh! DFKaiW5-A" },
-        ATK-DEF: if assets.fonts.ATK-DEF != none { assets.fonts.ATK-DEF } else { "Yu-Gi-Oh! ITC Stone Serif M" },
-        LINK: if assets.fonts.LINK != none { assets.fonts.LINK } else { "Yu-Gi-Oh! Matrix" },
+        ATK-DEF-SCALE: if assets.fonts.ATK-DEF-SCALE != none { assets.fonts.ATK-DEF-SCALE } else { "Yu-Gi-Oh! Matrix" },
+        LINK: if assets.fonts.LINK != none { assets.fonts.LINK } else { "Yu-Gi-Oh! Ro GSan Serif Std B" },
         PASSWD-NO: if assets.fonts.PASSWD-NO != none { assets.fonts.PASSWD-NO } else {
-            "Yu-Gi-Oh! Ro GSan Serif Std B"
+            "Yu-Gi-Oh! ITC Stone Serif M"
         },
     )
 
@@ -155,5 +155,37 @@
             },
         ),
     )
+    if isPendulum {
+        place(
+            dx: _scale_area.x.left,
+            dy: _scale_area.y,
+            block(
+                width: 11pt,
+                height: 12pt,
+                // stroke: .1pt,
+                inset: (x: 1pt, y: 3pt),
+                {
+                    set align(center + horizon)
+                    set text(font: fonts.ATK-DEF-SCALE, size: 10pt, fill: black)
+                    str(scale)
+                },
+            ),
+        )
+        place(
+            dx: _scale_area.x.right,
+            dy: _scale_area.y,
+            block(
+                width: 11pt,
+                height: 12pt,
+                // stroke: .1pt,
+                inset: (x: 1pt, y: 3pt),
+                {
+                    set align(center + horizon)
+                    set text(font: fonts.ATK-DEF-SCALE, size: 10pt, fill: black)
+                    str(scale)
+                },
+            ),
+        )
+    }
 }
 
