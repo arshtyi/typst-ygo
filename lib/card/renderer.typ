@@ -45,35 +45,41 @@
 
 #let asset_or(override, fallback) = if override != none { override } else { fallback }
 
-#let merge_assets(base, override) = (
-    arrows: (
-        bottom: asset_or(override.arrows.bottom, base.arrows.bottom),
-        bottom-left: asset_or(override.arrows.bottom-left, base.arrows.bottom-left),
-        bottom-right: asset_or(override.arrows.bottom-right, base.arrows.bottom-right),
-        left: asset_or(override.arrows.left, base.arrows.left),
-        right: asset_or(override.arrows.right, base.arrows.right),
-        top: asset_or(override.arrows.top, base.arrows.top),
-        top-left: asset_or(override.arrows.top-left, base.arrows.top-left),
-        top-right: asset_or(override.arrows.top-right, base.arrows.top-right),
-    ),
-    attribute: asset_or(override.attribute, base.attribute),
-    card_frame: asset_or(override.card_frame, base.card_frame),
-    card_image: asset_or(override.card_image, base.card_image),
-    fonts: (
-        atk_def_scale: asset_or(override.fonts.atk_def_scale, base.fonts.atk_def_scale),
-        link: asset_or(override.fonts.link, base.fonts.link),
-        password_no: asset_or(override.fonts.password_no, base.fonts.password_no),
-        sc: asset_or(override.fonts.sc, base.fonts.sc),
-    ),
-    icon: asset_or(override.icon, base.icon),
-    indicators: (
-        atk_def: asset_or(override.indicators.atk_def, base.indicators.atk_def),
-        atk_link: asset_or(override.indicators.atk_link, base.indicators.atk_link),
-        level: asset_or(override.indicators.level, base.indicators.level),
-        rank: asset_or(override.indicators.rank, base.indicators.rank),
-    ),
-    path: asset_or(override.path, base.path),
-)
+#let merge_assets(base, override) = {
+    let override_arrows = override.at("arrows", default: (:))
+    let override_fonts = override.at("fonts", default: (:))
+    let override_indicators = override.at("indicators", default: (:))
+
+    (
+        arrows: (
+            bottom: asset_or(override_arrows.at("bottom", default: none), base.arrows.bottom),
+            bottom-left: asset_or(override_arrows.at("bottom-left", default: none), base.arrows.bottom-left),
+            bottom-right: asset_or(override_arrows.at("bottom-right", default: none), base.arrows.bottom-right),
+            left: asset_or(override_arrows.at("left", default: none), base.arrows.left),
+            right: asset_or(override_arrows.at("right", default: none), base.arrows.right),
+            top: asset_or(override_arrows.at("top", default: none), base.arrows.top),
+            top-left: asset_or(override_arrows.at("top-left", default: none), base.arrows.top-left),
+            top-right: asset_or(override_arrows.at("top-right", default: none), base.arrows.top-right),
+        ),
+        attribute: asset_or(override.at("attribute", default: none), base.attribute),
+        card_frame: asset_or(override.at("card_frame", default: none), base.card_frame),
+        card_image: asset_or(override.at("card_image", default: none), base.card_image),
+        fonts: (
+            atk_def_scale: asset_or(override_fonts.at("atk_def_scale", default: none), base.fonts.atk_def_scale),
+            link: asset_or(override_fonts.at("link", default: none), base.fonts.link),
+            password_no: asset_or(override_fonts.at("password_no", default: none), base.fonts.password_no),
+            sc: asset_or(override_fonts.at("sc", default: none), base.fonts.sc),
+        ),
+        icon: asset_or(override.at("icon", default: none), base.icon),
+        indicators: (
+            atk_def: asset_or(override_indicators.at("atk_def", default: none), base.indicators.atk_def),
+            atk_link: asset_or(override_indicators.at("atk_link", default: none), base.indicators.atk_link),
+            level: asset_or(override_indicators.at("level", default: none), base.indicators.level),
+            rank: asset_or(override_indicators.at("rank", default: none), base.indicators.rank),
+        ),
+        path: asset_or(override.at("path", default: none), base.path),
+    )
+}
 
 #let default_frame = make_frame(card_kind.monster, "effect")
 
@@ -284,7 +290,18 @@
     )
 
     if is_spell or is_trap {
-        let has_icon = not (race == spell_race.normal or race == trap_race.normal)
+        let normalized_race = if race != none {
+            race
+        } else if is_spell {
+            spell_race.normal
+        } else {
+            trap_race.normal
+        }
+        let has_icon = if is_spell {
+            normalized_race != spell_race.normal
+        } else {
+            normalized_race != trap_race.normal
+        }
 
         place(
             dx: if has_icon { layout.race_pos.x.with_icon } else { layout.race_pos.x.without_icon },
@@ -300,7 +317,7 @@
                     if has_icon {
                         let icon_path = asset_or(
                             resolved_assets.icon,
-                            assets_path + "figure/icons/icon-" + race + ".png",
+                            assets_path + "figure/icons/icon-" + normalized_race + ".png",
                         )
                         box(image(icon_path, scaling: "pixelated"))
                     }
