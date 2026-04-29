@@ -2,7 +2,7 @@
 name = "ygo"
 version = "0.1.0"
 compiler = "0.14.0"
-entrypoint = "src/mod.typ"
+entrypoint = "lib/mod.typ"
 authors = ["arshtyi <arshtyi@foxmail.com>"]
 license = "MIT"
 description = "Make Yu-Gi-Oh! cards."
