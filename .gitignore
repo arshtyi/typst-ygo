@@ -1,5 +1,3 @@
-*.pdf
-
 assets/**
 !assets/**/
 !assets/**/.gitkeep

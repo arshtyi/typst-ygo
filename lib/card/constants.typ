@@ -33,7 +33,7 @@
         y: to_pt(1386),
     ),
     password_pos: (
-        x: to_pt(60),
+        x: to_pt(66),
         y: to_pt(1910),
     ),
     race_pos: (
@@ -75,7 +75,7 @@
         y: to_pt(1856),
     ),
     def_pos: (
-        x: to_pt(1160),
+        x: to_pt(1155),
         y: to_pt(1856),
     ),
     link_value_pos: (

@@ -283,7 +283,7 @@
             height: 10pt,
             {
                 set align(left + horizon)
-                set text(font: fonts.password_no, size: 6pt, fill: black)
+                set text(font: fonts.password_no, size: 4.71pt, fill: black)
                 padded_number(id, 8)
             },
         ),
