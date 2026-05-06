@@ -1,5 +1,4 @@
-#import "../lib/mod.typ": card
-#import "../lib/card/types.typ": card_kind, frame_family, make_frame, monster_frame, spell_race, trap_race
+#import "../lib/mod.typ": card, card_kind, frame_family, make_frame, monster_frame, spell_race, trap_race
 #import "@preview/zebraw:0.6.3": *
 #import "@preview/numbly:0.1.0": *
 
@@ -28,8 +27,7 @@
 == Quick Start
 
 ```typ
-#import "../lib/mod.typ": card
-#import "../lib/card/types.typ": card_kind, frame_family, make_frame, monster_frame, spell_race, trap_race
+#import "../lib/mod.typ": card, card_kind, frame_family, make_frame, monster_frame, spell_race, trap_race
 ```
 以`霸王龙 扎克`为例:
 ```typ
@@ -118,6 +116,8 @@
 #make_frame(card_kind.monster, monster_frame.xyz)
 #make_frame(card_kind.monster, monster_frame.link, family: frame_family.link)
 #make_frame(card_kind.monster, monster_frame.effect, family: frame_family.pendulum)
+#make_frame(card_kind.spell)
+#make_frame(card_kind.trap)
 ...
 ```
 
@@ -127,7 +127,7 @@
 - `variant`
 - `family`
 
-这样做的好处是调用端不需要自己拼 `"fusion-pendulum"` 此类名字.
+这样做的好处是调用端不需要自己拼 `"fusion-pendulum"` 此类名字.怪兽卡需要指定 `monster_frame`,魔法卡和陷阱卡因为各自只有一个卡框,只需要传 `card_kind.spell` 或 `card_kind.trap`.
 
 == Enum
 
@@ -232,7 +232,7 @@
     attribute: "trap",
     card_image: 23002292,
     description: "这张卡也能把基本分支付一半从手卡发动。\n①：对方把陷阱卡发动时才能发动。那个发动无效，那张卡直接盖放。那之后，对方可以从卡组把1张陷阱卡在自身的魔法与陷阱区域盖放。这张卡的发动后，直到回合结束时对方不能把陷阱卡发动。",
-    frame: make_frame(card_kind.trap, card_kind.trap),
+    frame: make_frame(card_kind.trap),
     id: 23002292,
     name: "红灯重启",
     race: "counter",

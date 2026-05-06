@@ -177,9 +177,9 @@
         }
         let target_height = if is_pendulum {
             if size.width == 712 and size.height == 908 {
-                layout.image.size.pendulum.tall_height - 1pt
+                layout.image.size.pendulum.tall_height
             } else {
-                layout.image.size.pendulum.short_height - 2pt
+                layout.image.size.pendulum.short_height
             }
         } else {
             layout.image.size.normal.height
@@ -283,7 +283,7 @@
             height: 10pt,
             {
                 set align(left + horizon)
-                set text(font: fonts.password_no, size: 4.71pt, fill: black)
+                set text(font: fonts.password_no, size: 4.71pt, fill: if is_xyz { white } else { black })
                 padded_number(id, 8)
             },
         ),
