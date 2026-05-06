@@ -47,11 +47,30 @@
     "bottom-right",
 )
 
-#let make_frame(kind, variant, family: frame_family.normal) = (
-    kind: kind,
-    family: family,
-    variant: variant,
-)
+#let make_frame(kind, ..args) = {
+    let positional = args.pos()
+    let named = args.named()
+    let variant = if positional.len() > 0 { positional.at(0) } else { none }
+    let family = named.at("family", default: frame_family.normal)
+
+    if positional.len() > 1 {
+        panic("make_frame accepts at most one frame variant")
+    }
+
+    let normalized_variant = if variant != none {
+        variant
+    } else if kind == card_kind.spell or kind == card_kind.trap {
+        kind
+    } else {
+        panic("monster frames require a variant")
+    }
+
+    (
+        kind: kind,
+        family: if kind == card_kind.monster { family } else { frame_family.normal },
+        variant: normalized_variant,
+    )
+}
 
 #let is_monster_frame(frame) = frame.kind == card_kind.monster
 #let is_spell_frame(frame) = frame.kind == card_kind.spell

@@ -1,16 +1,15 @@
-#import "../lib/mod.typ": card
-#import "../lib/card/types.typ": card_kind, frame_family, make_frame, monster_frame
+#import "../lib/mod.typ": card, card_kind, frame_family, make_frame, monster_frame
 #card(
-    atk: 5000,
-    attribute: "earth",
-    card_image: 23288411,
-    def: 5000,
-    description: "这张卡不能通常召唤。让这张卡以外的自己的手卡·墓地的「莫忘」怪兽5种类各1只回到卡组·额外卡组的场合才能从手卡·墓地特殊召唤。\n①：自己场上没有其他怪兽存在的场合，这张卡可以向对方怪兽全部各作1次攻击。②：1回合1次，对方把魔法·陷阱·怪兽的效果发动的场合才能发动。从自己的手卡·墓地把1只「莫忘」怪兽特殊召唤。",
+    atk: -1,
+    attribute: "divine",
+    card_image: 10000022,
+    def: -1,
+    description: "这张卡通常召唤的场合，必须把3只解放作召唤。\n①：这张卡的召唤不会被无效化。\n②：在这张卡的召唤成功时双方不能把卡的效果发动。\n③：这张卡的攻击力·守备力上升自己手卡数量×1000。\n④：每次对方场上有怪兽攻击表示召唤·特殊召唤发动。那些怪兽的攻击力下降2000。变成0的场合那怪兽破坏。\n⑤：这张卡特殊召唤的场合，结束阶段发动。这张卡送去墓地。",
     frame: make_frame(card_kind.monster, monster_frame.effect),
-    id: 23288411,
-    level: 11,
-    name: "冥骸合龙-莫忘冥地王灵",
-    type_line: "【幻龙族/特殊召唤/效果】",
+    id: 10000020,
+    level: 10,
+    name: "奥西里斯之天空龙",
+    type_line: "【幻神兽族/效果】",
 )
 
 #card(
@@ -27,16 +26,16 @@
 )
 
 #card(
-    atk: 3100,
-    attribute: "light",
-    card_image: 56733747,
-    def: 2500,
-    description: "「元素英雄 新宇侠」＋「翼侠」融合怪兽\n这张卡不用融合召唤不能特殊召唤。这个卡名的①的效果1回合只能使用1次。\n①：这张卡特殊召唤的场合才能发动。把最多有场上的怪兽的属性种类数量的对方场上的卡破坏。②：场上的这张卡攻击力上升自己墓地的怪兽数量×300，不会被效果破坏。③：这张卡战斗破坏怪兽的场合发动。给与对方那只怪兽的原本攻击力数值的伤害。",
+    atk: 3800,
+    attribute: "dark",
+    card_image: 54701958,
+    def: 3500,
+    description: "「月光舞狮子姬」＋「月光」怪兽×3\n这张卡用以上记的卡为融合素材的融合召唤才能特殊召唤。\n①：这张卡只要在怪兽区域存在，不受「月光」卡以外的卡的效果影响。②：这张卡在同1次的战斗阶段中可以作2次攻击。③：自己·对方回合1次，从额外卡组把1只「月光」怪兽送去墓地才能发动。对方场上的特殊召唤的怪兽全部破坏。",
     frame: make_frame(card_kind.monster, monster_frame.fusion),
-    id: 56733747,
-    level: 8,
-    name: "元素英雄 闪光新宇翼侠",
-    type_line: "【战士族/融合/效果】",
+    id: 54701958,
+    level: 12,
+    name: "月光舞狮子神姬",
+    type_line: "【兽战士族/融合/效果】",
 )
 
 #card(
@@ -66,6 +65,59 @@
 )
 
 #card(
+    atk: 3000,
+    attribute: "light",
+    card_image: 54842941,
+    def: 2500,
+    description: "①：把手卡的这张卡给对方观看才能发动（这个效果发动的回合，自己不用里侧守备表示不能把怪兽特殊召唤）。从手卡把1只怪兽里侧守备表示特殊召唤。②：自己回合对方在场上把卡的效果发动时，把里侧表示的这张卡变成表侧守备表示才能发动。那个发动无效并破坏。③：这张卡反转的场合发动。对方场上的怪兽全部变成里侧守备表示。这个效果变成里侧守备表示的怪兽不能把表示形式变更。",
+    frame: make_frame(card_kind.monster, monster_frame.effect, family: frame_family.pendulum),
+    id: 54842941,
+    level: 9,
+    name: "纠罪巧-惧鲸 Atoriϝ.MAR",
+    pendulum_description: "①：每次怪兽反转，给这张卡放置1个纠罪指示物。②：自己·对方的战斗阶段结束时，另一边的自己的灵摆区域有「纠罪巧」卡存在的场合，以比这张卡攻击力低的对方场上1只怪兽为对象才能发动。那只怪兽破坏。",
+    scale: 0,
+    type_line: "【机械族/灵摆/反转/效果】",
+)
+
+#card(
+    atk: 2800,
+    attribute: "dark",
+    card_image: 4731783,
+    description: "包含恶魔族怪兽的怪兽2只以上\n这个卡名的①②的效果1回合各能使用1次。\n①：自己·对方的主要阶段，可以丢弃1张手卡，从以下效果选择1个发动。●场上1张卡破坏。●这张卡直到结束阶段除外，从自己墓地把1只光·暗属性怪兽特殊召唤。②：自己准备阶段才能发动。自己抽出自己墓地的怪兽的种族种类的数量。那之后，选抽出数量的自己手卡用喜欢的顺序回到卡组下面。",
+    frame: make_frame(card_kind.monster, monster_frame.link, family: frame_family.link),
+    id: 4731783,
+    link_markers: (
+        left: true,
+        right: true,
+        bottom-left: true,
+        bottom-right: true,
+    ),
+    link_value: 4,
+    name: "无光之影 阿-宝·阿·库",
+    type_line: "【恶魔族/连接/效果】",
+)
+
+#card(
+    attribute: "spell",
+    card_image: 66518509,
+    description: "这个卡名的①②的效果1回合各能使用1次。\n①：双方的主要阶段才能发动。包含「莫忘」怪兽的自己的手卡·场上的怪兽作为融合素材，把1只融合怪兽融合召唤。这个回合是已有自己怪兽被效果破坏的场合，也能让自己墓地的「莫忘」怪兽回到卡组作为融合素材。②：自己主要阶段把墓地的这张卡除外才能发动。自己场上1只怪兽破坏，从卡组把1张「莫忘」魔法·陷阱卡加入手卡。",
+    frame: make_frame(card_kind.spell),
+    id: 66518509,
+    name: "冥骸融合-莫忘融合",
+    race: "quick-play",
+)
+
+#card(
+    attribute: "trap",
+    card_image: 100261007,
+    description: "这个卡名的②的效果1回合只能使用1次。\n①：只要自己的场上或墓地有「卡通」卡存在，对方把手卡全部持续公开，自己随时可以把对方场上的里侧表示卡确认。\n②：自己的场上·墓地有卡通怪兽以及「卡通」魔法卡存在的场合，宣言1个同一连锁上没有把效果发动的卡名才能发动。这张卡表侧表示存在期间，直到回合结束时原本卡名和宣言的卡相同的卡发动的效果无效化。",
+    frame: make_frame(card_kind.trap),
+    id: 100261007,
+    name: "看透心灵之眼",
+    race: "continuous",
+)
+
+#card(
     atk: 4000,
     attribute: "dark",
     card_image: 13331639,
@@ -78,6 +130,32 @@
     pendulum_description: "①：只要这张卡在灵摆区域存在，对方不能把场上的融合·同调·超量怪兽的效果发动。②：1回合1次，抽卡阶段以外从卡组有卡加入对方手卡时才能发动。那些卡破坏。",
     scale: 12,
     type_line: "【龙族/灵摆/融合/效果】",
+)
+
+#card(
+    atk: 3100,
+    attribute: "light",
+    card_image: 56733747,
+    def: 2500,
+    description: "「元素英雄 新宇侠」＋「翼侠」融合怪兽\n这张卡不用融合召唤不能特殊召唤。这个卡名的①的效果1回合只能使用1次。\n①：这张卡特殊召唤的场合才能发动。把最多有场上的怪兽的属性种类数量的对方场上的卡破坏。②：场上的这张卡攻击力上升自己墓地的怪兽数量×300，不会被效果破坏。③：这张卡战斗破坏怪兽的场合发动。给与对方那只怪兽的原本攻击力数值的伤害。",
+    frame: make_frame(card_kind.monster, monster_frame.fusion),
+    id: 56733747,
+    level: 8,
+    name: "元素英雄 闪光新宇翼侠",
+    type_line: "【战士族/融合/效果】",
+)
+
+#card(
+    atk: 5000,
+    attribute: "earth",
+    card_image: 23288411,
+    def: 5000,
+    description: "这张卡不能通常召唤。让这张卡以外的自己的手卡·墓地的「莫忘」怪兽5种类各1只回到卡组·额外卡组的场合才能从手卡·墓地特殊召唤。\n①：自己场上没有其他怪兽存在的场合，这张卡可以向对方怪兽全部各作1次攻击。②：1回合1次，对方把魔法·陷阱·怪兽的效果发动的场合才能发动。从自己的手卡·墓地把1只「莫忘」怪兽特殊召唤。",
+    frame: make_frame(card_kind.monster, monster_frame.effect),
+    id: 23288411,
+    level: 11,
+    name: "冥骸合龙-莫忘冥地王灵",
+    type_line: "【幻龙族/特殊召唤/效果】",
 )
 
 #card(
@@ -100,11 +178,11 @@
 
 #card(
     attribute: "spell",
-    card_image: 2263869,
-    description: "对方不能对应这张卡的发动把怪兽的效果发动。\n①：从额外卡组把1只怪兽送去墓地，以和那只怪兽相同种类（融合·同调·超量·灵摆·连接）的对方场上1只怪兽为对象才能发动。那只怪兽回到卡组。",
-    frame: make_frame(card_kind.spell, card_kind.spell),
-    id: 2263869,
-    name: "月女神之镞",
+    card_image: 57734012,
+    description: "这个卡名的效果在决斗中只能适用1次。\n①：自己抽卡阶段通过把通常抽卡的这张卡持续公开，那个回合的主要阶段1开始时才能发动。从自己的额外卡组·墓地选「混沌No.」怪兽以外的1只「No.101」～「No.107」其中任意种的「No.」怪兽特殊召唤，把持有和那只怪兽相同「No.」数字的1只「混沌No.」怪兽在那只怪兽上面重叠当作超量召唤从额外卡组特殊召唤。",
+    frame: make_frame(card_kind.spell),
+    id: 57734012,
+    name: "升阶魔法-七皇之剑",
     race: "normal",
 )
 
@@ -112,8 +190,18 @@
     attribute: "trap",
     card_image: 23002292,
     description: "这张卡也能把基本分支付一半从手卡发动。\n①：对方把陷阱卡发动时才能发动。那个发动无效，那张卡直接盖放。那之后，对方可以从卡组把1张陷阱卡在自身的魔法与陷阱区域盖放。这张卡的发动后，直到回合结束时对方不能把陷阱卡发动。",
-    frame: make_frame(card_kind.trap, card_kind.trap),
+    frame: make_frame(card_kind.trap),
     id: 23002292,
     name: "红灯重启",
     race: "counter",
+)
+
+#card(
+    attribute: "spell",
+    card_image: 2263869,
+    description: "对方不能对应这张卡的发动把怪兽的效果发动。\n①：从额外卡组把1只怪兽送去墓地，以和那只怪兽相同种类（融合·同调·超量·灵摆·连接）的对方场上1只怪兽为对象才能发动。那只怪兽回到卡组。",
+    frame: make_frame(card_kind.spell),
+    id: 2263869,
+    name: "月女神之镞",
+    race: "normal",
 )
