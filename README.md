@@ -36,25 +36,24 @@
 
 ### Assets
 
-使用此模板时应当拥有类似[arshtyi/Card-Templates-Of-YuGiOh](https://github.com/arshtyi/Card-Templates-Of-YuGiOh)的资源文件.文件树应当和本仓库(`assets/`)类似,但你也可以修改文件树,只要在模板中override正确的资源路径即可.
+使用此模板时应当拥有本仓库 `assets/ot/` 结构中的资源文件、`assets/ot/card/ot.json` 和 `assets/ot/images/index.json`.目前重构后的默认入口只适配 `docs/docs.typ` 中定义的 OT 数据格式.
 
 ### Quick Start
 
 假设你已经拥有了[assets](#assets)中的资源文件,并且在`template`目录下编写：
 
 ```typ
-#import "../lib/mod.typ": card, card_kind, frame_family, make_frame, monster_frame
-#card(
-    attribute: "trap",
-    card_image: 100261007,
-    description: "这个卡名的②的效果1回合只能使用1次。\n①：只要自己的场上或墓地有「卡通」卡存在，对方把手卡全部持续公开，自己随时可以把对方场上的里侧表示卡确认。\n②：自己的场上·墓地有卡通怪兽以及「卡通」魔法卡存在的场合，宣言1个同一连锁上没有把效果发动的卡名才能发动。这张卡表侧表示存在期间，直到回合结束时原本卡名和宣言的卡相同的卡发动的效果无效化。",
-    frame: make_frame(card_kind.trap),
-    id: 100261007,
-    name: "看透心灵之眼",
-    race: "continuous",
-)
+#import "../lib/mod.typ": ot_card_by_id, ot_card_data, ot_image_index
+
+#let cards = ot_card_data()
+#let images = ot_image_index()
+#ot_card_by_id(23002292, cards: cards, images: images)
 ```
 
 ### Export
 
-PPI的最佳值为600.
+PPI的最佳值为600.从仓库根目录编译示例：
+
+```sh
+typst compile --root . --font-path assets/ot/font template/template.typ template/template.pdf
+```
