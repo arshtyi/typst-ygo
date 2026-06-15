@@ -1,0 +1,6 @@
+{
+  "tinymist.fontPaths": [
+    "./assets/ot/font",
+    "./assets/rd/font"
+  ]
+}
