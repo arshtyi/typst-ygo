@@ -1,5 +1,5 @@
 #import "../utils/fit-text.typ": fit_text_to_box
-#import "../utils/image-size.typ": image_size
+#import "../utils/jpeg-size.typ": jpeg_image_size
 #import "../utils/scale-x-to-fit.typ": scale_x_to_fit
 #import "layout.typ": ot_layout
 
@@ -32,7 +32,7 @@
         ot_layout.image.size.normal.width
     }
     let target_height = if is_pendulum {
-        let size = image_size(path)
+        let size = jpeg_image_size(path)
         if size.width == 712 and size.height == 908 {
             ot_layout.image.size.pendulum.tall_height
         } else {
@@ -71,9 +71,9 @@
         dy: if model.is_pendulum { ot_layout.image.pos.pendulum.y } else { ot_layout.image.pos.normal.y },
         render_card_image(model.image_path, model.is_pendulum),
     )
-    place(dx: 0pt, dy: 0pt, image(ot_assets_root + "frame/" + model.frame_asset + ".png"))
+    place(dx: 0pt, dy: 0pt, image(ot_assets_root + "frame/" + model.frame_name + ".png"))
     place(dx: ot_layout.attribute_pos.x, dy: ot_layout.attribute_pos.y, image(
-        ot_assets_root + "attribute/" + model.attribute_asset + ".png",
+        ot_assets_root + "attribute/" + model.attribute_name + ".png",
     ))
 
     place(
@@ -144,7 +144,7 @@
     )
 
     if model.is_spell or model.is_trap {
-        let has_icon = model.race_icon_asset != none
+        let has_icon = model.spell_trap_icon_name != none
         place(
             dx: if has_icon { ot_layout.race_pos.x.with_icon } else { ot_layout.race_pos.x.without_icon },
             dy: ot_layout.race_pos.y,
@@ -157,7 +157,7 @@
                     set text(font: card_text_fonts, size: 10pt, fill: black)
                     if model.is_spell { "【魔法卡" } else { "【陷阱卡" }
                     if has_icon {
-                        box(image(ot_assets_root + "icon/" + model.race_icon_asset + ".png", scaling: "pixelated"))
+                        box(image(ot_assets_root + "icon/" + model.spell_trap_icon_name + ".png", scaling: "pixelated"))
                     }
                     "】"
                 },

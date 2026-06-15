@@ -5,10 +5,7 @@
 ## Note
 
 - 模板不会提交到[universe](https://typst.app/universe).
-- 目前仅支持简体中文.
-- 仅限已发售的卡片.
-- 不支持 DIY 卡片.
-- 模板可能不会非常频繁地更新,因为非web的游戏王卡片模板非常难做,而且不稳定.所以我只会在有时间和动力的时候更新,并且我不会承诺任何更新计划.并且不是所有问题都会被解决,因为如果每个参数(和行为)都是合法的就不会有任何问题.
+- 数据规范见[arshtyi/ygo-definations](https://github.com/arshtyi/ygo-definations).
 
 ## Examples
 
@@ -29,6 +26,21 @@
             <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-08.png" alt="8" style="width:100%;max-width:240px;height:auto;" /></td>
             <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-09.png" alt="9" style="width:100%;max-width:240px;height:auto;" /></td>
         </tr>
+        <tr>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-10.png" alt="1" style="width:100%;max-width:240px;height:auto;" /></td>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-11.png" alt="2" style="width:100%;max-width:240px;height:auto;" /></td>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-12.png" alt="3" style="width:100%;max-width:240px;height:auto;" /></td>
+        </tr>
+        <tr>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-13.png" alt="1" style="width:100%;max-width:240px;height:auto;" /></td>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-14.png" alt="2" style="width:100%;max-width:240px;height:auto;" /></td>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-15.png" alt="3" style="width:100%;max-width:240px;height:auto;" /></td>
+        </tr>
+        <tr>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-16.png" alt="1" style="width:100%;max-width:240px;height:auto;" /></td>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-17.png" alt="2" style="width:100%;max-width:240px;height:auto;" /></td>
+            <td width="33%"><img src="https://raw.githubusercontent.com/arshtyi/typst-ygo/main/template/card-18.png" alt="3" style="width:100%;max-width:240px;height:auto;" /></td>
+        </tr>
     </tbody>
 </table>
 
@@ -36,18 +48,142 @@
 
 ### Assets
 
-使用此模板时应当拥有本仓库 `assets/ot/` 结构中的资源文件、`assets/ot/card/ot.json` 和 `assets/ot/images/index.json`.目前重构后的默认入口只适配 `docs/docs.typ` 中定义的 OT 数据格式.
+- 你应当获取必要的资源文件,见[arshtyi/ygo-assets](https://github.com/arshtyi/ygo-assets).
+- 你应当获取必要的数据文件,见[arshtyi/ygo-cards](https://github.com/arshtyi/ygo-cards).
+
+目录结构参考：
+
+```txt
+assets/
+├── ot
+│   ├── attribute
+│   │   ├── dark.png
+│   │   ├── devine.png
+│   │   ├── earth.png
+│   │   ├── fire.png
+│   │   ├── light.png
+│   │   ├── spell.png
+│   │   ├── trap.png
+│   │   ├── water.png
+│   │   └── wind.png
+│   ├── bar
+│   │   ├── atk-def.png
+│   │   └── atk-link.png
+│   ├── card
+│   │   └── ot.json
+│   ├── font
+│   │   ├── YGO_Card_JP.ttf
+│   │   ├── Yu-Gi-Oh! DFKaiW5-A.ttf
+│   │   ├── Yu-Gi-Oh! ITC Stone Serif M.ttf
+│   │   ├── Yu-Gi-Oh! Matrix.ttf
+│   │   └── Yu-Gi-Oh! RoGSanSrfStd-Bd.ttf
+│   ├── frame
+│   │   ├── effect-pendulum.png
+│   │   ├── effect.png
+│   │   ├── fusion-pendulum.png
+│   │   ├── fusion.png
+│   │   ├── link.png
+│   │   ├── normal-pendulum.png
+│   │   ├── normal.png
+│   │   ├── ritual-pendulum.png
+│   │   ├── ritual.png
+│   │   ├── spell.png
+│   │   ├── synchro-pendulum.png
+│   │   ├── synchro.png
+│   │   ├── token.png
+│   │   ├── trap.png
+│   │   ├── xyz-pendulum.png
+│   │   └── xyz.png
+│   ├── icon
+│   │   ├── continuous.png
+│   │   ├── counter.png
+│   │   ├── equip.png
+│   │   ├── field.png
+│   │   ├── quick-play.png
+│   │   └── ritual.png
+│   ├── images
+│   │   ├── 10000022.jpg
+│   │   ├── 13332685.jpg
+│   │   ├── 23002292.jpg
+│   │   ├── 35952884.jpg
+│   │   ├── 4731783.jpg
+│   │   ├── 48348921.jpg
+│   │   ├── 54701958.jpg
+│   │   ├── 54842941.jpg
+│   │   └── 66518509.jpg
+│   ├── level
+│   │   └── level.png
+│   ├── link
+│   │   ├── 0.png
+│   │   ├── 1.png
+│   │   ├── 2.png
+│   │   ├── 3.png
+│   │   ├── 4.png
+│   │   ├── 5.png
+│   │   ├── 6.png
+│   │   └── 7.png
+│   └── rank
+│       └── rank.png
+└── rd
+    ├── attribute
+    │   ├── dark.png
+    │   ├── earth.png
+    │   ├── fire.png
+    │   ├── light.png
+    │   ├── spell.png
+    │   ├── trap.png
+    │   ├── water.png
+    │   └── windy.png
+    ├── bar
+    │   ├── atk-def.png
+    │   └── maximum-atk.png
+    ├── card
+    │   └── rd.json
+    ├── font
+    │   ├── YGO_Card_JP.ttf
+    │   ├── Yu-Gi-Oh! DFKaiW5-A.ttf
+    │   ├── Yu-Gi-Oh! ITC Stone Serif M.ttf
+    │   └── Yu-Gi-Oh! RoGSanSrfStd-Bd.ttf
+    ├── frame
+    │   ├── effect.png
+    │   ├── fusion.png
+    │   ├── normal.png
+    │   ├── ritual.png
+    │   ├── spell.png
+    │   └── trap.png
+    ├── icon
+    │   ├── continuous.png
+    │   ├── equip.png
+    │   ├── field.png
+    │   └── ritual.png
+    ├── images
+    │   ├── 120102001.jpg
+    │   ├── 120102002.jpg
+    │   ├── 120102006.jpg
+    │   ├── 120102009.jpg
+    │   ├── 120105013.jpg
+    │   ├── 120109039.jpg
+    │   ├── 120150001.jpg
+    │   ├── 120150002.jpg
+    │   └── 120150003.jpg
+    ├── legend
+    │   └── legene.png
+    └── level
+        └── container.png
+```
 
 ### Quick Start
 
-假设你已经拥有了[assets](#assets)中的资源文件,并且在`template`目录下编写：
+假设你已经拥有了上述文件且组织正确,并且在`template`目录下编写：
 
 ```typ
-#import "../lib/mod.typ": ot_card_by_id, ot_card_data, ot_image_index
+#import "../lib/mod.typ": ot_card_by_id, ot_card_data, rd_card_by_id, rd_card_data
 
-#let cards = ot_card_data()
-#let images = ot_image_index()
-#ot_card_by_id(23002292, cards: cards, images: images)
+#let ot_cards = ot_card_data()
+#ot_card_by_id(23002292, cards: ot_cards)
+
+#let rd_cards = rd_card_data()
+#rd_card_by_id(120105013, cards: rd_cards)
 ```
 
 ### Export
