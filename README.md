@@ -58,14 +58,14 @@ assets/
 ├── ot
 │   ├── attribute
 │   │   ├── dark.png
-│   │   ├── devine.png
+│   │   ├── divine.png
 │   │   ├── earth.png
 │   │   ├── fire.png
 │   │   ├── light.png
 │   │   ├── spell.png
 │   │   ├── trap.png
 │   │   ├── water.png
-│   │   └── wind.png
+│   │   └── windy.png
 │   ├── bar
 │   │   ├── atk-def.png
 │   │   └── atk-link.png
@@ -157,15 +157,14 @@ assets/
     │   ├── field.png
     │   └── ritual.png
     ├── images
-    │   ├── 120102001.jpg
-    │   ├── 120102002.jpg
-    │   ├── 120102006.jpg
-    │   ├── 120102009.jpg
     │   ├── 120105013.jpg
-    │   ├── 120109039.jpg
-    │   ├── 120150001.jpg
-    │   ├── 120150002.jpg
-    │   ├── 120150003.jpg
+    │   ├── 120121001.jpg
+    │   ├── 120181003.jpg
+    │   ├── 120244055.jpg
+    │   ├── 120249015.jpg
+    │   ├── 120249016.jpg
+    │   ├── 120249017.jpg
+    │   ├── 120279005.jpg
     │   └── 120280001.jpg
     ├── legend
     │   └── legene.png
