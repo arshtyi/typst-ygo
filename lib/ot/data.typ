@@ -49,13 +49,13 @@
     } else if has_card_type(card, "陷阱") {
         "trap"
     } else if card.attribute == 0 {
-        "devine"
+        "divine"
     } else if card.attribute == 1 {
         "light"
     } else if card.attribute == 2 {
         "dark"
     } else if card.attribute == 3 {
-        "wind"
+        "windy"
     } else if card.attribute == 4 {
         "earth"
     } else if card.attribute == 5 {

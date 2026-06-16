@@ -11,7 +11,7 @@
         end: (x: to_pt(1100), y: to_pt(170)),
     ),
     attribute_pos: (
-        x: to_pt(1140),
+        x: to_pt(1135),
         y: to_pt(68),
     ),
     legend_pos: (
