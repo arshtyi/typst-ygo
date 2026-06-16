@@ -44,14 +44,7 @@
         cjk-latin-spacing: auto,
         overhang: false,
     )
-    set par(
-        justify: true,
-        linebreaks: "optimized",
-        justification-limits: (
-            spacing: (min: 90%, max: 130%),
-            tracking: (min: -0.01em, max: 0.02em),
-        ),
-    )
+    set par(justify: true)
 
     place(dx: rd_layout.image.pos.x, dy: rd_layout.image.pos.y, render_card_image(model.image_path))
     place(dx: 0pt, dy: 0pt, image(rd_assets_root + "frame/" + model.frame_name + ".png"))
@@ -71,7 +64,7 @@
                 set text(
                     font: card_text_fonts,
                     size: 12pt,
-                    fill: if model.is_spell or model.is_trap { white } else { black },
+                    fill: black,
                 )
                 scale_x_to_fit(min_x_scale: 50%, model.name)
             },
@@ -148,23 +141,6 @@
                         tracking: -2pt,
                     )
                     str(model.level)
-                },
-            ),
-        )
-    }
-
-    if model.maximum_part != none {
-        place(
-            dx: rd_layout.maximum_part_area.start.x,
-            dy: rd_layout.maximum_part_area.start.y,
-            block(
-                width: rd_layout.maximum_part_area.end.x - rd_layout.maximum_part_area.start.x,
-                height: rd_layout.maximum_part_area.end.y - rd_layout.maximum_part_area.start.y,
-                inset: (x: 2pt, y: 2pt),
-                {
-                    set align(center + horizon)
-                    set text(font: "Yu-Gi-Oh! Ro GSan Serif Std B", size: 8pt, fill: white)
-                    "MAX " + model.maximum_part
                 },
             ),
         )

@@ -76,15 +76,6 @@
     }
 })
 
-#let rd_maximum_part(card) = {
-    let position = card.at("maximum", default: none)
-    if position == none {
-        none
-    } else {
-        ("L", "M", "R").at(position, default: str(position))
-    }
-}
-
 #let rd_card_image_path(image_id) = "../../assets/rd/images/" + str(image_id) + ".jpg"
 
 #let rd_card_model(card) = {
@@ -111,7 +102,6 @@
         is_trap: is_trap,
         level: card.at("level", default: 0),
         legend: card.legend,
-        maximum_part: rd_maximum_part(card),
         maximum_atk: card.at("maximumAtk", default: none),
     )
 }
