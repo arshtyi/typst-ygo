@@ -6,6 +6,8 @@
 
 - 模板不会提交到[universe](https://typst.app/universe).
 - 数据规范见[arshtyi/ygo-definations](https://github.com/arshtyi/ygo-definations).
+- 在线版本:[typst-ygo-web](https://github.com/arshtyi/typst-ygo-web).
+- 离线版本:[ygo_draw](https://github.com/arshtyi/ygo_draw).
 
 ## Examples
 
