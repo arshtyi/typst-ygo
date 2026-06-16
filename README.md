@@ -188,8 +188,4 @@ assets/
 
 ### Export
 
-PPI的最佳值为600.从仓库根目录编译示例：
-
-```sh
-typst compile --root . --font-path assets/ot/font template/template.typ template/template.pdf
-```
+PPI的最佳值为600.
