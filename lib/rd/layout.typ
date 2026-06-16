@@ -26,10 +26,6 @@
         pos: (x: to_pt(80), y: to_pt(1210)),
         number_pos: (x: to_pt(80), y: to_pt(1280)),
     ),
-    maximum_part_area: (
-        start: (x: to_pt(250), y: to_pt(1210)),
-        end: (x: to_pt(520), y: to_pt(1285)),
-    ),
     typeline_area: (
         start: (x: to_pt(90), y: to_pt(1470)),
         end: (x: to_pt(1100), y: to_pt(1530)),
