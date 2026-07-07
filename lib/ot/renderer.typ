@@ -1,4 +1,4 @@
-#import "../utils/fit-text.typ": fit_text_to_box
+#import "../utils/fit-effect-text.typ": fit_effect_text_to_box
 #import "../utils/jpeg-size.typ": jpeg_image_size
 #import "../utils/scale-x-to-fit.typ": scale_x_to_fit
 #import "layout.typ": ot_layout
@@ -122,8 +122,8 @@
                 inset: (x: 1pt, y: 1pt),
                 {
                     set align(left)
-                    set text(font: card_text_fonts, size: 10pt, fill: black)
-                    fit_text_to_box(model.pendulum_description)
+                    set text(font: card_text_fonts, size: 4.5pt, fill: black)
+                    fit_effect_text_to_box(4, model.pendulum_description)
                 },
             ),
         )
@@ -137,7 +137,9 @@
             height: 10pt,
             {
                 set align(left + horizon)
-                set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 4.71pt, fill: if model.is_xyz { white } else { black })
+                set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 4.71pt, fill: if model.is_xyz { white } else {
+                    black
+                })
                 padded_number(model.id, 8)
             },
         ),
@@ -176,7 +178,9 @@
                 )
             }
         } else {
-            let star_path = if model.is_xyz { ot_assets_root + "rank/rank.png" } else { ot_assets_root + "level/level.png" }
+            let star_path = if model.is_xyz { ot_assets_root + "rank/rank.png" } else {
+                ot_assets_root + "level/level.png"
+            }
 
             if model.level <= 12 {
                 for pos in range(model.level) {
@@ -264,8 +268,8 @@
             inset: (x: 1pt, y: 1pt),
             {
                 set align(left)
-                set text(font: card_text_fonts, size: 10pt, fill: black)
-                fit_text_to_box(model.description)
+                set text(font: card_text_fonts, size: 4.5pt, fill: black)
+                fit_effect_text_to_box(5, model.description)
             },
         ),
     )
