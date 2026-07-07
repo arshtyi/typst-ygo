@@ -55,8 +55,11 @@
 
 目录结构参考：
 
+<details>
+<summary>assets 目录结构</summary>
+
 ```txt
-assets/
+assets
 ├── ot
 │   ├── attribute
 │   │   ├── dark.png
@@ -106,7 +109,7 @@ assets/
 │   ├── images
 │   │   ├── 10000022.jpg
 │   │   ├── 13332685.jpg
-│   │   ├── 23002292.jpg
+│   │   ├── 34298391.jpg
 │   │   ├── 35952884.jpg
 │   │   ├── 4731783.jpg
 │   │   ├── 48348921.jpg
@@ -173,6 +176,8 @@ assets/
     └── level
         └── container.png
 ```
+
+</details>
 
 ### Quick Start
 
