@@ -170,7 +170,7 @@
             inset: (x: 1pt, y: 1pt),
             {
                 set align(left)
-                set text(font: card_text_fonts, size: 10pt, fill: black)
+                set text(font: card_text_fonts, size: 5pt, fill: black)
                 fit_text_to_box(model.description)
             },
         ),
