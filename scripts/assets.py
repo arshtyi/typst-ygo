@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Sync demo card images from the Typst template.
+"""Download typst-ygo assets and sync demo card images.
 
-The script reads ``ot_demo_ids`` and ``rd_demo_ids`` from
-``template/template.typ``, maps each card id to its ``image`` id through the
-local JSON card data, downloads missing images from YGOPRODeck, and removes
-unused JPG files from the matching demo image directories.
+Run with ``python scripts/assets.py``.
+
+Commands:
+
+* no command: print help information.
+* ``sync``: keep the current demo image synchronization behavior.
+* ``download``: download card data and static resources into ``assets``.
+* ``all``: download resources first, then sync demo images.
 """
 
 from __future__ import annotations
@@ -14,15 +18,26 @@ import json
 import re
 import shutil
 import sys
+import tarfile
 import tempfile
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
+OT_DATA_URL = "https://github.com/arshtyi/ygo-cards/releases/download/latest/ot.json"
+RD_DATA_URL = "https://github.com/arshtyi/ygo-cards/releases/download/latest/rd.json"
+ASSETS_ARCHIVE_URL = "https://github.com/arshtyi/ygo-assets/releases/download/latest/assets.tar.xz"
 IMAGE_URL = "https://images.ygoprodeck.com/images/cards_cropped/{image_id}.jpg"
-USER_AGENT = "typst-ygo-demo-image-sync/1.0"
+USER_AGENT = "typst-ygo-assets/1.0"
+
+
+@dataclass(frozen=True)
+class DataResource:
+    name: str
+    url: str
+    destination: Path
 
 
 @dataclass(frozen=True)
@@ -35,7 +50,7 @@ class ImageSet:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Download and clean OT/RD demo images used by template/template.typ.",
+        description="Download typst-ygo resources and sync demo card images.",
     )
     parser.add_argument(
         "--root",
@@ -52,12 +67,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Print planned downloads/deletions without changing files.",
+        help="Print planned downloads/extractions/deletions without changing files.",
     )
     parser.add_argument(
         "--force",
         action="store_true",
-        help="Re-download images even when the target JPG already exists.",
+        help="Re-download demo images even when the target JPG already exists.",
     )
     parser.add_argument(
         "--no-clean",
@@ -68,9 +83,19 @@ def parse_args() -> argparse.Namespace:
         "--timeout",
         type=float,
         default=30.0,
-        help="Network timeout in seconds per image download.",
+        help="Network timeout in seconds per download.",
     )
-    return parser.parse_args()
+
+    parser.add_argument(
+        "command",
+        nargs="?",
+        choices=("download", "sync", "all"),
+        help="Action to run: download resources, sync demo images, or all.",
+    )
+    args = parser.parse_args()
+    if args.command is None:
+        parser.print_help()
+    return args
 
 
 def find_repo_root(start: Path) -> Path:
@@ -100,6 +125,165 @@ def read_text(path: Path) -> str:
         return path.read_text(encoding="utf-8")
     except FileNotFoundError as exc:
         raise RuntimeError(f"missing file: {path}") from exc
+
+
+def download_to_temp(url: str, directory: Path, timeout: float) -> Path:
+    directory.mkdir(parents=True, exist_ok=True)
+    request = Request(url, headers={"User-Agent": USER_AGENT})
+    temp = tempfile.NamedTemporaryFile(
+        prefix=".download.",
+        suffix=".tmp",
+        dir=directory,
+        delete=False,
+    )
+    temp_path = Path(temp.name)
+
+    try:
+        with temp:
+            with urlopen(request, timeout=timeout) as response:
+                shutil.copyfileobj(response, temp)
+    except HTTPError as exc:
+        temp_path.unlink(missing_ok=True)
+        raise RuntimeError(f"HTTP {exc.code} while downloading {url}: {exc.reason}") from exc
+    except URLError as exc:
+        temp_path.unlink(missing_ok=True)
+        raise RuntimeError(f"network error while downloading {url}: {exc.reason}") from exc
+    except OSError as exc:
+        temp_path.unlink(missing_ok=True)
+        raise RuntimeError(f"file error while downloading {url}: {exc}") from exc
+
+    if temp_path.stat().st_size == 0:
+        temp_path.unlink(missing_ok=True)
+        raise RuntimeError(f"downloaded file is empty: {url}")
+    return temp_path
+
+
+def download_json_resource(resource: DataResource, timeout: float, dry_run: bool) -> None:
+    print(f"{resource.name}:")
+    print(f"  download {resource.url} -> {resource.destination}")
+    if dry_run:
+        return
+
+    temp_path = download_to_temp(resource.url, resource.destination.parent, timeout)
+    try:
+        with temp_path.open("r", encoding="utf-8") as file:
+            json.load(file)
+        temp_path.replace(resource.destination)
+    except json.JSONDecodeError as exc:
+        temp_path.unlink(missing_ok=True)
+        raise RuntimeError(f"downloaded JSON is invalid for {resource.name}: {exc}") from exc
+    except OSError as exc:
+        temp_path.unlink(missing_ok=True)
+        raise RuntimeError(f"file error while writing {resource.destination}: {exc}") from exc
+
+
+def archive_target_path(assets_dir: Path, member_name: str) -> Path | None:
+    normalized_name = member_name.replace("\\", "/")
+    member_path = PurePosixPath(normalized_name)
+    if member_path.is_absolute():
+        raise RuntimeError(f"archive member uses absolute path: {member_name}")
+
+    parts = [part for part in member_path.parts if part not in ("", ".")]
+    if not parts:
+        return None
+    if any(part == ".." for part in parts):
+        raise RuntimeError(f"archive member escapes assets directory: {member_name}")
+    if any(":" in part for part in parts):
+        raise RuntimeError(f"archive member contains invalid path segment: {member_name}")
+    if parts[0] == "assets":
+        parts = parts[1:]
+    if not parts:
+        return None
+
+    target = assets_dir.joinpath(*parts).resolve()
+    try:
+        target.relative_to(assets_dir)
+    except ValueError as exc:
+        raise RuntimeError(f"archive member escapes assets directory: {member_name}") from exc
+    return target
+
+
+def extract_assets_archive(archive_path: Path, assets_dir: Path) -> int:
+    extracted = 0
+    try:
+        archive = tarfile.open(archive_path, mode="r:xz")
+    except tarfile.TarError as exc:
+        raise RuntimeError(f"invalid assets archive: {exc}") from exc
+
+    with archive:
+        for member in archive:
+            target = archive_target_path(assets_dir, member.name)
+            if target is None:
+                continue
+
+            if member.isdir():
+                target.mkdir(parents=True, exist_ok=True)
+                continue
+            if not member.isfile():
+                raise RuntimeError(f"unsupported archive member type: {member.name}")
+
+            target.parent.mkdir(parents=True, exist_ok=True)
+            source = archive.extractfile(member)
+            if source is None:
+                raise RuntimeError(f"could not read archive member: {member.name}")
+
+            temp = tempfile.NamedTemporaryFile(
+                prefix=f".{target.name}.",
+                suffix=".tmp",
+                dir=target.parent,
+                delete=False,
+            )
+            temp_path = Path(temp.name)
+            try:
+                with source, temp:
+                    shutil.copyfileobj(source, temp)
+                temp_path.replace(target)
+            except OSError as exc:
+                temp_path.unlink(missing_ok=True)
+                raise RuntimeError(f"file error while extracting {target}: {exc}") from exc
+            extracted += 1
+
+    return extracted
+
+
+def download_assets_archive(assets_dir: Path, timeout: float, dry_run: bool) -> None:
+    print("assets archive:")
+    print(f"  download {ASSETS_ARCHIVE_URL} -> {assets_dir}")
+    if dry_run:
+        print(f"  extract archive -> {assets_dir}")
+        return
+
+    temp_path = download_to_temp(ASSETS_ARCHIVE_URL, assets_dir, timeout)
+    try:
+        extracted = extract_assets_archive(temp_path, assets_dir)
+    finally:
+        temp_path.unlink(missing_ok=True)
+    print(f"  extracted {extracted} file(s)")
+
+
+def download_assets(root: Path, timeout: float, dry_run: bool) -> None:
+    assets_dir = resolve_under_root(root, Path("assets"))
+    data_resources = (
+        DataResource(
+            name="OT card data",
+            url=OT_DATA_URL,
+            destination=resolve_under_root(root, Path("assets/ot/card/ot.json")),
+        ),
+        DataResource(
+            name="RD card data",
+            url=RD_DATA_URL,
+            destination=resolve_under_root(root, Path("assets/rd/card/rd.json")),
+        ),
+    )
+
+    if not dry_run:
+        assets_dir.mkdir(parents=True, exist_ok=True)
+
+    download_assets_archive(assets_dir, timeout, dry_run)
+    for resource in data_resources:
+        if not dry_run:
+            resource.destination.parent.mkdir(parents=True, exist_ok=True)
+        download_json_resource(resource, timeout, dry_run)
 
 
 def extract_demo_ids(template_text: str, variable_name: str) -> list[int]:
@@ -177,25 +361,13 @@ def download_image(image_id: int, destination: Path, timeout: float, dry_run: bo
         return True
 
     destination.parent.mkdir(parents=True, exist_ok=True)
-    request = Request(url, headers={"User-Agent": USER_AGENT})
-
-    temp = tempfile.NamedTemporaryFile(
-        prefix=f".{destination.stem}.",
-        suffix=".tmp",
-        dir=destination.parent,
-        delete=False,
-    )
-    temp_path = Path(temp.name)
     try:
-        with temp:
-            with urlopen(request, timeout=timeout) as response:
-                shutil.copyfileobj(response, temp)
+        temp_path = download_to_temp(url, destination.parent, timeout)
+    except RuntimeError as exc:
+        print(f"  {exc}", file=sys.stderr)
+        return False
 
-        if temp_path.stat().st_size == 0:
-            print(f"  missing/empty image: {url}", file=sys.stderr)
-            temp_path.unlink(missing_ok=True)
-            return False
-
+    try:
         with temp_path.open("rb") as temp_file:
             if temp_file.read(2) != b"\xff\xd8":
                 print(f"  downloaded file is not a JPEG image: {url}", file=sys.stderr)
@@ -205,17 +377,6 @@ def download_image(image_id: int, destination: Path, timeout: float, dry_run: bo
         temp_path.replace(destination)
         print(f"  downloaded {destination}")
         return True
-    except HTTPError as exc:
-        if exc.code == 404:
-            print(f"  image does not exist: {url}", file=sys.stderr)
-        else:
-            print(f"  HTTP {exc.code} while downloading {url}: {exc.reason}", file=sys.stderr)
-        temp_path.unlink(missing_ok=True)
-        return False
-    except URLError as exc:
-        print(f"  network error while downloading {url}: {exc.reason}", file=sys.stderr)
-        temp_path.unlink(missing_ok=True)
-        return False
     except OSError as exc:
         print(f"  file error while writing {destination}: {exc}", file=sys.stderr)
         temp_path.unlink(missing_ok=True)
@@ -270,10 +431,8 @@ def sync_image_set(image_set: ImageSet, template_text: str, dry_run: bool, force
     return failures
 
 
-def run() -> int:
-    args = parse_args()
-    root = resolve_root(args.root)
-    template_path = resolve_under_root(root, args.template)
+def sync_demo_images(root: Path, template: Path, dry_run: bool, force: bool, clean: bool, timeout: float) -> int:
+    template_path = resolve_under_root(root, template)
     template_text = read_text(template_path)
 
     image_sets = (
@@ -296,6 +455,29 @@ def run() -> int:
         failures += sync_image_set(
             image_set=image_set,
             template_text=template_text,
+            dry_run=dry_run,
+            force=force,
+            clean=clean,
+            timeout=timeout,
+        )
+    return failures
+
+
+def run() -> int:
+    args = parse_args()
+    if args.command is None:
+        return 0
+
+    root = resolve_root(args.root)
+
+    if args.command in ("download", "all"):
+        download_assets(root=root, timeout=args.timeout, dry_run=args.dry_run)
+
+    failures = 0
+    if args.command in ("sync", "all"):
+        failures = sync_demo_images(
+            root=root,
+            template=args.template,
             dry_run=args.dry_run,
             force=args.force,
             clean=not args.no_clean,
