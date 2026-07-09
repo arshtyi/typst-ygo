@@ -78,9 +78,15 @@
 
 #let rd_card_image_path(image_id) = "../../assets/rd/images/" + str(image_id) + ".jpg"
 
-#let rd_card_description(card) = card.description.replace(regex("】\\r?\\n"), "】")
+#let rd_card_description(card, compress_description: true) = {
+    if compress_description {
+        card.description.replace(regex("】\\r?\\n"), "】")
+    } else {
+        card.description
+    }
+}
 
-#let rd_card_model(card) = {
+#let rd_card_model(card, compress_description: true) = {
     let is_monster = has_card_type(card, "怪兽")
     let is_spell = has_card_type(card, "魔法")
     let is_trap = has_card_type(card, "陷阱")
@@ -93,7 +99,7 @@
         name: card.name,
         typeline_parts: typeline_parts,
         typeline_icon_names: rd_typeline_icon_names(card, typeline_parts),
-        description: rd_card_description(card),
+        description: rd_card_description(card, compress_description: compress_description),
         frame_name: rd_frame_name(card),
         attribute_name: rd_attribute_name(card),
         image_path: rd_card_image_path(card.image),
@@ -108,11 +114,13 @@
     )
 }
 
-#let rd_card(card) = render_card(rd_card_model(card))
+#let rd_card(card, compress_description: true) = {
+    render_card(rd_card_model(card, compress_description: compress_description))
+}
 
-#let rd_card_by_id(id, cards: none) = {
+#let rd_card_by_id(id, cards: none, compress_description: true) = {
     let resolved_cards = if cards == none { rd_card_data() } else { cards }
     let card = resolved_cards.filter(card => card.id == id).first(default: none)
     assert(card != none, message: "RD card not found: " + str(id))
-    rd_card(card)
+    rd_card(card, compress_description: compress_description)
 }

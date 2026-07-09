@@ -193,6 +193,8 @@ assets
 #rd_card_by_id(120105013, cards: rd_cards)
 ```
 
+`ot_card`、`ot_card_by_id`、`rd_card`和`rd_card_by_id`可传入`compress_description: false`关闭描述文本压缩，默认开启。
+
 ### Export
 
 PPI的最佳值为600.

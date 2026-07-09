@@ -21,11 +21,11 @@
     }
 }
 
-#let fit_effect_text_to_box(max_estimated_lines, min_size: 1pt, step: 0.1pt, body) = context {
+#let fit_effect_text_to_box(max_estimated_lines, min_size: 1pt, step: 0.1pt, body, compress: true) = context {
     let max_size = text.size
     layout(size => {
         let estimated_lines = estimated_effect_lines(size.width, max_size, body)
-        let fitted_body = if estimated_lines > max_estimated_lines {
+        let fitted_body = if compress and estimated_lines > max_estimated_lines {
             compact_effect_breaks(body)
         } else {
             body
