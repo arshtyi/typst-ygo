@@ -78,6 +78,8 @@
 
 #let rd_card_image_path(image_id) = "../../assets/rd/images/" + str(image_id) + ".jpg"
 
+#let rd_card_description(card) = card.description.replace(regex("】\\r?\\n"), "】")
+
 #let rd_card_model(card) = {
     let is_monster = has_card_type(card, "怪兽")
     let is_spell = has_card_type(card, "魔法")
@@ -91,7 +93,7 @@
         name: card.name,
         typeline_parts: typeline_parts,
         typeline_icon_names: rd_typeline_icon_names(card, typeline_parts),
-        description: card.description,
+        description: rd_card_description(card),
         frame_name: rd_frame_name(card),
         attribute_name: rd_attribute_name(card),
         image_path: rd_card_image_path(card.image),
