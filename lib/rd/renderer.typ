@@ -72,7 +72,7 @@
     )
 
     if model.legend {
-        place(dx: rd_layout.legend_pos.x, dy: rd_layout.legend_pos.y, image(rd_assets_root + "legend/legene.png"))
+        place(dx: rd_layout.legend_pos.x, dy: rd_layout.legend_pos.y, image(rd_assets_root + "legend/legend.png"))
     }
 
     if model.is_monster {

@@ -122,7 +122,7 @@
                 inset: (x: 1pt, y: 1pt),
                 {
                     set align(left)
-                    set text(font: card_text_fonts, size: 4.5pt, fill: black)
+                    set text(font: card_text_fonts, size: 5pt, fill: black)
                     fit_effect_text_to_box(4, model.pendulum_description, compress: model.compress_description)
                 },
             ),
@@ -268,7 +268,7 @@
             inset: (x: 1pt, y: 1pt),
             {
                 set align(left)
-                set text(font: card_text_fonts, size: 4.5pt, fill: black)
+                set text(font: card_text_fonts, size: 5pt, fill: black)
                 fit_effect_text_to_box(5, model.description, compress: model.compress_description)
             },
         ),

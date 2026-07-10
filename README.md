@@ -5,9 +5,10 @@
 ## Note
 
 - 模板不会提交到[universe](https://typst.app/universe).
-- 数据规范见[arshtyi/ygo-definations](https://github.com/arshtyi/ygo-definations).
-- 在线版本:[typst-ygo-web](https://github.com/arshtyi/typst-ygo-web).
-- 离线版本:[ygo_draw](https://github.com/arshtyi/ygo_draw).
+- 数据规范见[arshtyi/ygo-definitions](https://github.com/arshtyi/ygo-definitions).
+- web版本:[typst-ygo-web](https://github.com/arshtyi/typst-ygo-web).
+- desktop版本:[ygo-draw](https://github.com/arshtyi/ygo-draw).
+- cli版本:[ygo-draw-cli](https://github.com/arshtyi/ygo-draw-cli).
 
 ## Examples
 
@@ -52,8 +53,6 @@
 
 - 你应当获取必要的资源文件,见[arshtyi/ygo-assets](https://github.com/arshtyi/ygo-assets).
 - 你应当获取必要的数据文件,见[arshtyi/ygo-cards](https://github.com/arshtyi/ygo-cards).
-
-目录结构参考：
 
 <details>
 <summary>assets 目录结构</summary>
@@ -162,17 +161,17 @@ assets
     │   ├── field.png
     │   └── ritual.png
     ├── images
-    │   ├── 120105013.jpg
-    │   ├── 120121001.jpg
-    │   ├── 120181003.jpg
-    │   ├── 120244055.jpg
-    │   ├── 120249015.jpg
-    │   ├── 120249016.jpg
-    │   ├── 120249017.jpg
-    │   ├── 120279005.jpg
-    │   └── 120280001.jpg
+    │   ├── 120155021.jpg
+    │   ├── 120155022.jpg
+    │   ├── 120155023.jpg
+    │   ├── 120231069.jpg
+    │   ├── 120257066.jpg
+    │   ├── 120287032.jpg
+    │   ├── 120293046.jpg
+    │   ├── 120293068.jpg
+    │   └── 120305014.jpg
     ├── legend
-    │   └── legene.png
+    │   └── legend.png
     └── level
         └── container.png
 ```
