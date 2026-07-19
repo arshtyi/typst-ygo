@@ -2,10 +2,6 @@
 #let to_pt(value) = value * 72pt / ppi
 
 #let rd_layout = (
-    page: (
-        width: to_pt(1394),
-        height: to_pt(2031),
-    ),
     name_area: (
         start: (x: to_pt(60), y: to_pt(70)),
         end: (x: to_pt(1100), y: to_pt(170)),

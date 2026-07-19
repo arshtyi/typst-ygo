@@ -34,10 +34,11 @@
 
 #let render_card(model) = {
     set page(
-        width: rd_layout.page.width,
-        height: rd_layout.page.height,
+        width: auto,
+        height: auto,
         margin: 0pt,
     )
+    set place(top + left)
     set text(
         lang: "zh",
         region: "cn",
@@ -47,7 +48,7 @@
     set par(justify: true)
 
     place(dx: rd_layout.image.pos.x, dy: rd_layout.image.pos.y, render_card_image(model.image_path))
-    place(dx: 0pt, dy: 0pt, image(rd_assets_root + "frame/" + model.frame_name + ".png"))
+    image(rd_assets_root + "frame/" + model.frame_name + ".png")
     place(dx: rd_layout.attribute_pos.x, dy: rd_layout.attribute_pos.y, image(
         rd_assets_root + "attribute/" + model.attribute_name + ".png",
     ))

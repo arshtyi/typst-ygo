@@ -47,10 +47,11 @@
 
 #let render_card(model) = {
     set page(
-        width: ot_layout.page.width,
-        height: ot_layout.page.height,
+        width: auto,
+        height: auto,
         margin: 0pt,
     )
+    set place(top + left)
     set text(
         lang: "zh",
         region: "cn",
@@ -71,7 +72,7 @@
         dy: if model.is_pendulum { ot_layout.image.pos.pendulum.y } else { ot_layout.image.pos.normal.y },
         render_card_image(model.image_path, model.is_pendulum),
     )
-    place(dx: 0pt, dy: 0pt, image(ot_assets_root + "frame/" + model.frame_name + ".png"))
+    image(ot_assets_root + "frame/" + model.frame_name + ".png")
     place(dx: ot_layout.attribute_pos.x, dy: ot_layout.attribute_pos.y, image(
         ot_assets_root + "attribute/" + model.attribute_name + ".png",
     ))
@@ -155,13 +156,17 @@
             block(
                 width: if has_icon { 50pt } else { 45pt },
                 height: 12pt,
-                inset: (x: 1pt, y: 2pt),
+                inset: (right: 1pt),
                 {
                     set align(right + horizon)
                     set text(font: card_text_fonts, size: 10pt, fill: black)
                     if model.is_spell { "【魔法卡" } else { "【陷阱卡" }
                     if has_icon {
-                        box(image(ot_assets_root + "icon/" + model.spell_trap_icon_name + ".png", scaling: "pixelated"))
+                        box(baseline: .8pt, scale(
+                            image(ot_assets_root + "icon/" + model.spell_trap_icon_name + ".png"),
+                            x: 110%,
+                            y: 110%,
+                        ))
                     }
                     "】"
                 },

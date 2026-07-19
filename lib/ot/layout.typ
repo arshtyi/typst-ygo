@@ -2,10 +2,6 @@
 #let to_pt(value) = value * 72pt / ppi
 
 #let ot_layout = (
-    page: (
-        width: to_pt(1394),
-        height: to_pt(2031),
-    ),
     image: (
         pos: (
             normal: (x: to_pt(169), y: to_pt(376)),
@@ -22,7 +18,7 @@
     ),
     attribute_pos: (
         x: to_pt(1166),
-        y: to_pt(96),
+        y: to_pt(98),
     ),
     name_area: (
         start: (x: to_pt(100), y: to_pt(100)),
