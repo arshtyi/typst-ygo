@@ -176,19 +176,21 @@
         ),
     )
 
-    place(
-        dx: rd_layout.password_pos.x,
-        dy: rd_layout.password_pos.y,
-        block(
-            width: 70pt,
-            height: 10pt,
-            {
-                set align(left + horizon)
-                set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 6pt, fill: white)
-                str(model.id)
-            },
-        ),
-    )
+    if model.draw_password {
+        place(
+            dx: rd_layout.password_pos.x,
+            dy: rd_layout.password_pos.y,
+            block(
+                width: 70pt,
+                height: 10pt,
+                {
+                    set align(left + horizon)
+                    set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 6pt, fill: white)
+                    str(model.id)
+                },
+            ),
+        )
+    }
 
     pagebreak(weak: true)
 }

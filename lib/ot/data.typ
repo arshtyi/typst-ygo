@@ -113,7 +113,7 @@
 
 #let ot_card_image_path(image_id) = "../../assets/ot/images/" + str(image_id) + ".jpg"
 
-#let ot_card_model(card, compress_description: true) = {
+#let ot_card_model(card, compress_description: true, draw_password: true) = {
     let is_monster = has_card_type(card, "怪兽")
     let is_spell = has_card_type(card, "魔法")
     let is_trap = has_card_type(card, "陷阱")
@@ -140,18 +140,23 @@
         link_value: card.at("linkValue", default: none),
         pendulum_description: card.at("pendulumDescription", default: none),
         compress_description: compress_description,
+        draw_password: draw_password,
         spell_trap_icon_name: ot_spell_trap_icon_name(card),
         scale: card.at("pendulumScale", default: none),
     )
 }
 
-#let ot_card(card, compress_description: true) = {
-    render_card(ot_card_model(card, compress_description: compress_description))
+#let ot_card(card, compress_description: true, draw_password: true) = {
+    render_card(ot_card_model(
+        card,
+        compress_description: compress_description,
+        draw_password: draw_password,
+    ))
 }
 
-#let ot_card_by_id(id, cards: none, compress_description: true) = {
+#let ot_card_by_id(id, cards: none, compress_description: true, draw_password: true) = {
     let resolved_cards = if cards == none { ot_card_data() } else { cards }
     let card = resolved_cards.filter(card => card.id == id).first(default: none)
     assert(card != none, message: "OT card not found: " + str(id))
-    ot_card(card, compress_description: compress_description)
+    ot_card(card, compress_description: compress_description, draw_password: draw_password)
 }

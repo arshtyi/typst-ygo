@@ -60,139 +60,123 @@
 ```txt
 assets
 ├── ot
-│   ├── attribute
-│   │   ├── dark.png
-│   │   ├── divine.png
-│   │   ├── earth.png
-│   │   ├── fire.png
-│   │   ├── light.png
-│   │   ├── spell.png
-│   │   ├── trap.png
-│   │   ├── water.png
-│   │   └── windy.png
-│   ├── bar
-│   │   ├── atk-def.png
-│   │   └── atk-link.png
-│   ├── card
-│   │   └── ot.json
-│   ├── font
-│   │   ├── YGO_Card_JP.ttf
-│   │   ├── Yu-Gi-Oh! DFKaiW5-A.ttf
-│   │   ├── Yu-Gi-Oh! ITC Stone Serif M.ttf
-│   │   ├── Yu-Gi-Oh! Matrix.ttf
-│   │   └── Yu-Gi-Oh! RoGSanSrfStd-Bd.ttf
-│   ├── frame
-│   │   ├── effect-pendulum.png
-│   │   ├── effect.png
-│   │   ├── fusion-pendulum.png
-│   │   ├── fusion.png
-│   │   ├── link.png
-│   │   ├── normal-pendulum.png
-│   │   ├── normal.png
-│   │   ├── ritual-pendulum.png
-│   │   ├── ritual.png
-│   │   ├── spell.png
-│   │   ├── synchro-pendulum.png
-│   │   ├── synchro.png
-│   │   ├── token.png
-│   │   ├── trap.png
-│   │   ├── xyz-pendulum.png
-│   │   └── xyz.png
-│   ├── icon
-│   │   ├── continuous.png
-│   │   ├── counter.png
-│   │   ├── equip.png
-│   │   ├── field.png
-│   │   ├── quick-play.png
-│   │   └── ritual.png
-│   ├── images
-│   │   ├── 10000022.jpg
-│   │   ├── 13332685.jpg
-│   │   ├── 34298391.jpg
-│   │   ├── 35952884.jpg
-│   │   ├── 4731783.jpg
-│   │   ├── 48348921.jpg
-│   │   ├── 54701958.jpg
-│   │   ├── 54842941.jpg
-│   │   └── 66518509.jpg
-│   ├── level
-│   │   └── level.png
-│   ├── link
-│   │   ├── 0.png
-│   │   ├── 1.png
-│   │   ├── 2.png
-│   │   ├── 3.png
-│   │   ├── 4.png
-│   │   ├── 5.png
-│   │   ├── 6.png
-│   │   └── 7.png
-│   └── rank
-│       └── rank.png
+│   ├── attribute
+│   │   ├── dark.png
+│   │   ├── divine.png
+│   │   ├── earth.png
+│   │   ├── fire.png
+│   │   ├── light.png
+│   │   ├── spell.png
+│   │   ├── trap.png
+│   │   ├── water.png
+│   │   └── windy.png
+│   ├── bar
+│   │   ├── atk-def.png
+│   │   └── atk-link.png
+│   ├── card
+│   │   └── ot.json
+│   ├── font
+│   │   ├── YGO_Card_JP.ttf
+│   │   ├── Yu-Gi-Oh! DFKaiW5-A.ttf
+│   │   ├── Yu-Gi-Oh! ITC Stone Serif M.ttf
+│   │   ├── Yu-Gi-Oh! Matrix.ttf
+│   │   └── Yu-Gi-Oh! RoGSanSrfStd-Bd.ttf
+│   ├── frame
+│   │   ├── effect-pendulum.png
+│   │   ├── effect.png
+│   │   ├── fusion-pendulum.png
+│   │   ├── fusion.png
+│   │   ├── link.png
+│   │   ├── normal-pendulum.png
+│   │   ├── normal.png
+│   │   ├── ritual-pendulum.png
+│   │   ├── ritual.png
+│   │   ├── spell.png
+│   │   ├── synchro-pendulum.png
+│   │   ├── synchro.png
+│   │   ├── token.png
+│   │   ├── trap.png
+│   │   ├── xyz-pendulum.png
+│   │   └── xyz.png
+│   ├── icon
+│   │   ├── continuous.png
+│   │   ├── counter.png
+│   │   ├── equip.png
+│   │   ├── field.png
+│   │   ├── quick-play.png
+│   │   └── ritual.png
+│   ├── images
+│   │   ├── 10000022.jpg
+│   │   ├── 13332685.jpg
+│   │   ├── 34298391.jpg
+│   │   ├── 35952884.jpg
+│   │   ├── 4731783.jpg
+│   │   ├── 48348921.jpg
+│   │   ├── 54701958.jpg
+│   │   ├── 54842941.jpg
+│   │   └── 66518509.jpg
+│   ├── level
+│   │   └── level.png
+│   ├── link
+│   │   ├── 0.png
+│   │   ├── 1.png
+│   │   ├── 2.png
+│   │   ├── 3.png
+│   │   ├── 4.png
+│   │   ├── 5.png
+│   │   ├── 6.png
+│   │   └── 7.png
+│   └── rank
+│       └── rank.png
 └── rd
     ├── attribute
-    │   ├── dark.png
-    │   ├── earth.png
-    │   ├── fire.png
-    │   ├── light.png
-    │   ├── spell.png
-    │   ├── trap.png
-    │   ├── water.png
-    │   └── windy.png
+    │   ├── dark.png
+    │   ├── earth.png
+    │   ├── fire.png
+    │   ├── light.png
+    │   ├── spell.png
+    │   ├── trap.png
+    │   ├── water.png
+    │   └── windy.png
     ├── bar
-    │   ├── atk-def.png
-    │   └── maximum-atk.png
+    │   ├── atk-def.png
+    │   └── maximum-atk.png
     ├── card
-    │   └── rd.json
+    │   └── rd.json
     ├── font
-    │   ├── YGO_Card_JP.ttf
-    │   ├── Yu-Gi-Oh! DFKaiW5-A.ttf
-    │   ├── Yu-Gi-Oh! ITC Stone Serif M.ttf
-    │   └── Yu-Gi-Oh! RoGSanSrfStd-Bd.ttf
+    │   ├── YGO_Card_JP.ttf
+    │   ├── Yu-Gi-Oh! DFKaiW5-A.ttf
+    │   ├── Yu-Gi-Oh! ITC Stone Serif M.ttf
+    │   └── Yu-Gi-Oh! RoGSanSrfStd-Bd.ttf
     ├── frame
-    │   ├── effect.png
-    │   ├── fusion.png
-    │   ├── normal.png
-    │   ├── ritual.png
-    │   ├── spell.png
-    │   └── trap.png
+    │   ├── effect.png
+    │   ├── fusion.png
+    │   ├── normal.png
+    │   ├── ritual.png
+    │   ├── spell.png
+    │   └── trap.png
     ├── icon
-    │   ├── continuous.png
-    │   ├── equip.png
-    │   ├── field.png
-    │   └── ritual.png
+    │   ├── continuous.png
+    │   ├── equip.png
+    │   ├── field.png
+    │   └── ritual.png
     ├── images
-    │   ├── 120155021.jpg
-    │   ├── 120155022.jpg
-    │   ├── 120155023.jpg
-    │   ├── 120231069.jpg
-    │   ├── 120257066.jpg
-    │   ├── 120287032.jpg
-    │   ├── 120293046.jpg
-    │   ├── 120293068.jpg
-    │   └── 120305014.jpg
+    │   ├── 120155021.jpg
+    │   ├── 120155022.jpg
+    │   ├── 120155023.jpg
+    │   ├── 120231069.jpg
+    │   ├── 120257066.jpg
+    │   ├── 120287032.jpg
+    │   ├── 120293046.jpg
+    │   ├── 120293068.jpg
+    │   └── 120305014.jpg
     ├── legend
-    │   └── legend.png
+    │   └── legend.png
     └── level
         └── container.png
 ```
 
 </details>
-
-### Quick Start
-
-假设你已经拥有了上述文件且组织正确,并且在`template`目录下编写：
-
-```typ
-#import "../lib/mod.typ": ot_card_by_id, ot_card_data, rd_card_by_id, rd_card_data
-
-#let ot_cards = ot_card_data()
-#ot_card_by_id(23002292, cards: ot_cards)
-
-#let rd_cards = rd_card_data()
-#rd_card_by_id(120105013, cards: rd_cards)
-```
-
-`ot_card`、`ot_card_by_id`、`rd_card`和`rd_card_by_id`可传入`compress_description: false`关闭描述文本压缩，默认开启。
 
 ### Export
 

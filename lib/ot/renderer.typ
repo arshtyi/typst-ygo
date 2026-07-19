@@ -129,21 +129,23 @@
         )
     }
 
-    place(
-        dx: ot_layout.password_pos.x,
-        dy: ot_layout.password_pos.y,
-        block(
-            width: 32pt,
-            height: 10pt,
-            {
-                set align(left + horizon)
-                set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 4.71pt, fill: if model.is_xyz { white } else {
-                    black
-                })
-                padded_number(model.id, 8)
-            },
-        ),
-    )
+    if model.draw_password {
+        place(
+            dx: ot_layout.password_pos.x,
+            dy: ot_layout.password_pos.y,
+            block(
+                width: 32pt,
+                height: 10pt,
+                {
+                    set align(left + horizon)
+                    set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 4.71pt, fill: if model.is_xyz { white } else {
+                        black
+                    })
+                    padded_number(model.id, 8)
+                },
+            ),
+        )
+    }
 
     if model.is_spell or model.is_trap {
         let has_icon = model.spell_trap_icon_name != none

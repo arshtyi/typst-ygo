@@ -86,7 +86,7 @@
     }
 }
 
-#let rd_card_model(card, compress_description: true) = {
+#let rd_card_model(card, compress_description: true, draw_password: true) = {
     let is_monster = has_card_type(card, "怪兽")
     let is_spell = has_card_type(card, "魔法")
     let is_trap = has_card_type(card, "陷阱")
@@ -111,16 +111,21 @@
         level: card.at("level", default: 0),
         legend: card.legend,
         maximum_atk: card.at("maximumAtk", default: none),
+        draw_password: draw_password,
     )
 }
 
-#let rd_card(card, compress_description: true) = {
-    render_card(rd_card_model(card, compress_description: compress_description))
+#let rd_card(card, compress_description: true, draw_password: true) = {
+    render_card(rd_card_model(
+        card,
+        compress_description: compress_description,
+        draw_password: draw_password,
+    ))
 }
 
-#let rd_card_by_id(id, cards: none, compress_description: true) = {
+#let rd_card_by_id(id, cards: none, compress_description: true, draw_password: true) = {
     let resolved_cards = if cards == none { rd_card_data() } else { cards }
     let card = resolved_cards.filter(card => card.id == id).first(default: none)
     assert(card != none, message: "RD card not found: " + str(id))
-    rd_card(card, compress_description: compress_description)
+    rd_card(card, compress_description: compress_description, draw_password: draw_password)
 }
