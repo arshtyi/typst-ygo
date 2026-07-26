@@ -80,7 +80,9 @@
 
 #let rd_card_description(card, compress_description: true) = {
     if compress_description {
-        card.description.replace(regex("】\\r?\\n"), "】")
+        card.description
+            .replace(regex("】\\r?\\n"), "】")
+            .replace(regex("\\r?\\n(●)"), match => match.captures.at(0))
     } else {
         card.description
     }
