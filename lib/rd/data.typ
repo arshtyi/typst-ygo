@@ -6,37 +6,37 @@
 
 #let rd_frame_name(card) = {
     if has_card_type(card, "魔法") {
-        "spell"
+        "4"
     } else if has_card_type(card, "陷阱") {
-        "trap"
+        "5"
     } else if has_card_type(card, "融合") {
-        "fusion"
+        "3"
     } else if has_card_type(card, "仪式") {
-        "ritual"
+        "2"
     } else if has_card_type(card, "通常") {
-        "normal"
+        "0"
     } else {
-        "effect"
+        "1"
     }
 }
 
 #let rd_attribute_name(card) = {
     if has_card_type(card, "魔法") {
-        "spell"
+        "10"
     } else if has_card_type(card, "陷阱") {
-        "trap"
+        "20"
     } else if card.attribute == 0 {
-        "light"
+        "00"
     } else if card.attribute == 1 {
-        "dark"
+        "01"
     } else if card.attribute == 2 {
-        "windy"
+        "02"
     } else if card.attribute == 3 {
-        "earth"
+        "03"
     } else if card.attribute == 4 {
-        "fire"
+        "04"
     } else if card.attribute == 5 {
-        "water"
+        "05"
     } else {
         panic("unsupported RD attribute: " + str(card.attribute))
     }
@@ -44,13 +44,13 @@
 
 #let rd_spell_trap_icon_name(type_name) = {
     if type_name == "场地" {
-        "field"
+        "3"
     } else if type_name == "装备" {
-        "equip"
+        "1"
     } else if type_name == "永续" {
-        "continuous"
+        "2"
     } else if type_name == "仪式" {
-        "ritual"
+        "0"
     } else {
         none
     }

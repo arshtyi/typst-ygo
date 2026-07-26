@@ -73,13 +73,13 @@
     )
 
     if model.legend {
-        place(dx: rd_layout.legend_pos.x, dy: rd_layout.legend_pos.y, image(rd_assets_root + "legend/legend.png"))
+        place(dx: rd_layout.legend_pos.x, dy: rd_layout.legend_pos.y, image(rd_assets_root + "legend/0.png"))
     }
 
     if model.is_monster {
         if model.maximum_atk != none {
             place(dx: rd_layout.maximum_atk.bar_pos.x, dy: rd_layout.maximum_atk.bar_pos.y, image(
-                rd_assets_root + "bar/maximum-atk.png",
+                rd_assets_root + "bar/1.png",
             ))
             place(
                 dx: rd_layout.maximum_atk.value_pos.x,
@@ -95,7 +95,7 @@
                 ),
             )
         }
-        place(dx: rd_layout.bar_pos.x, dy: rd_layout.bar_pos.y, image(rd_assets_root + "bar/atk-def.png"))
+        place(dx: rd_layout.bar_pos.x, dy: rd_layout.bar_pos.y, image(rd_assets_root + "bar/0.png"))
         place(
             dx: rd_layout.atk_pos.x,
             dy: rd_layout.atk_pos.y,
@@ -125,7 +125,7 @@
         place(
             dx: rd_layout.level.pos.x,
             dy: rd_layout.level.pos.y,
-            image(rd_assets_root + "level/container.png"),
+            image(rd_assets_root + "level/0.png"),
         )
         place(
             dx: rd_layout.level.number_pos.x,

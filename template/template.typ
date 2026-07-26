@@ -16,7 +16,7 @@
 )
 
 #for id in ot_demo_ids {
-    ot_card_by_id(id, cards: ot_cards, draw_password: false)
+    ot_card_by_id(id, cards: ot_cards)
 }
 
 #let rd_demo_ids = (
@@ -32,5 +32,5 @@
 )
 
 #for id in rd_demo_ids {
-    rd_card_by_id(id, cards: rd_cards, draw_password: false)
+    rd_card_by_id(id, cards: rd_cards)
 }

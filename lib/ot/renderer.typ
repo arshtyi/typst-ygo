@@ -185,8 +185,8 @@
                 )
             }
         } else {
-            let star_path = if model.is_xyz { ot_assets_root + "rank/rank.png" } else {
-                ot_assets_root + "level/level.png"
+            let star_path = if model.is_xyz { ot_assets_root + "rank/0.png" } else {
+                ot_assets_root + "level/0.png"
             }
 
             if model.level <= 12 {
@@ -213,9 +213,9 @@
         }
 
         place(dx: ot_layout.bar_pos.x, dy: ot_layout.bar_pos.y, image(if model.is_link {
-            ot_assets_root + "bar/atk-link.png"
+            ot_assets_root + "bar/1.png"
         } else {
-            ot_assets_root + "bar/atk-def.png"
+            ot_assets_root + "bar/0.png"
         }))
 
         place(

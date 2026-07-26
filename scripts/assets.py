@@ -7,7 +7,8 @@ Commands:
 
 * no command: print help information.
 * ``sync``: keep the current demo image synchronization behavior.
-* ``download``: download card data and static resources into ``assets``.
+* ``download``: download card data and static resources into the ignored
+  ``assets`` directory.
 * ``all``: download resources first, then sync demo images.
 """
 
@@ -31,6 +32,7 @@ RD_DATA_URL = "https://github.com/arshtyi/ygo-cards/releases/download/latest/rd.
 ASSETS_ARCHIVE_URL = "https://github.com/arshtyi/ygo-assets/releases/download/latest/assets.tar.xz"
 IMAGE_URL = "https://images.ygoprodeck.com/images/cards_cropped/{image_id}.jpg"
 USER_AGENT = "typst-ygo-assets/1.0"
+ASSETS_ARCHIVE_ROOTS = frozenset(("ot", "rd", "readme.md"))
 
 
 @dataclass(frozen=True)
@@ -100,7 +102,7 @@ def parse_args() -> argparse.Namespace:
 
 def find_repo_root(start: Path) -> Path:
     for candidate in (start, *start.parents):
-        if (candidate / "template" / "template.typ").is_file() and (candidate / "assets").is_dir():
+        if (candidate / "template" / "template.typ").is_file() and (candidate / "lib" / "mod.typ").is_file():
             return candidate
     raise RuntimeError("could not auto-detect repository root")
 
@@ -190,10 +192,10 @@ def archive_target_path(assets_dir: Path, member_name: str) -> Path | None:
         raise RuntimeError(f"archive member escapes assets directory: {member_name}")
     if any(":" in part for part in parts):
         raise RuntimeError(f"archive member contains invalid path segment: {member_name}")
-    if parts[0] == "assets":
-        parts = parts[1:]
-    if not parts:
-        return None
+    if parts[0] not in ASSETS_ARCHIVE_ROOTS:
+        raise RuntimeError(f"archive member has unexpected root: {member_name}")
+    if parts[0] == "readme.md" and len(parts) != 1:
+        raise RuntimeError(f"archive member is nested under readme.md: {member_name}")
 
     target = assets_dir.joinpath(*parts).resolve()
     try:

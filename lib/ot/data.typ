@@ -6,21 +6,21 @@
 
 #let ot_monster_frame_name(card) = {
     if has_card_type(card, "连接") {
-        "link"
+        "007"
     } else if has_card_type(card, "融合") {
-        "fusion"
+        "004"
     } else if has_card_type(card, "仪式") {
-        "ritual"
+        "003"
     } else if has_card_type(card, "同调") {
-        "synchro"
+        "005"
     } else if has_card_type(card, "超量") {
-        "xyz"
+        "006"
     } else if has_card_type(card, "衍生物") {
-        "token"
+        "000"
     } else if has_card_type(card, "通常") {
-        "normal"
+        "001"
     } else if has_card_type(card, "效果") {
-        "effect"
+        "002"
     } else {
         none
     }
@@ -28,15 +28,22 @@
 
 #let ot_frame_name(card) = {
     if has_card_type(card, "魔法") {
-        "spell"
+        "100"
     } else if has_card_type(card, "陷阱") {
-        "trap"
+        "200"
     } else {
         let frame = ot_monster_frame_name(card)
         if has_card_type(card, "连接") {
-            "link"
+            frame
         } else if has_card_type(card, "灵摆") {
-            frame + "-pendulum"
+            (
+                "001": "011",
+                "002": "012",
+                "003": "013",
+                "004": "014",
+                "005": "015",
+                "006": "016",
+            ).at(frame)
         } else {
             frame
         }
@@ -45,23 +52,23 @@
 
 #let ot_attribute_name(card) = {
     if has_card_type(card, "魔法") {
-        "spell"
+        "10"
     } else if has_card_type(card, "陷阱") {
-        "trap"
+        "20"
     } else if card.attribute == 0 {
-        "divine"
+        "00"
     } else if card.attribute == 1 {
-        "light"
+        "01"
     } else if card.attribute == 2 {
-        "dark"
+        "02"
     } else if card.attribute == 3 {
-        "windy"
+        "03"
     } else if card.attribute == 4 {
-        "earth"
+        "04"
     } else if card.attribute == 5 {
-        "fire"
+        "05"
     } else if card.attribute == 6 {
-        "water"
+        "06"
     } else {
         panic("unsupported OT attribute: " + str(card.attribute))
     }
@@ -70,23 +77,23 @@
 #let ot_spell_trap_icon_name(card) = {
     if has_card_type(card, "魔法") {
         if has_card_type(card, "场地") {
-            "field"
+            "4"
         } else if has_card_type(card, "装备") {
-            "equip"
+            "3"
         } else if has_card_type(card, "永续") {
-            "continuous"
+            "1"
         } else if has_card_type(card, "速攻") {
-            "quick-play"
+            "2"
         } else if has_card_type(card, "仪式") {
-            "ritual"
+            "0"
         } else {
             none
         }
     } else if has_card_type(card, "陷阱") {
         if has_card_type(card, "永续") {
-            "continuous"
+            "1"
         } else if has_card_type(card, "反击") {
-            "counter"
+            "5"
         } else {
             none
         }
