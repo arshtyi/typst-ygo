@@ -1,6 +1,5 @@
 #import "../lib/mod.typ": ot-card, ot-cards, rd-card, rd-cards
 
-#set page(width: auto, height: auto, margin: 0pt)
 
 #let ot-data = ot-cards()
 #let rd-data = rd-cards()
@@ -16,12 +15,6 @@
     66518509,
     34298391,
 )
-
-#for id in ot-demo-ids {
-    ot-card(id, cards: ot-data)
-    pagebreak(weak: true)
-}
-
 #let rd-demo-ids = (
     120293068,
     120231069,
@@ -34,7 +27,22 @@
     120155023,
 )
 
-#for id in rd-demo-ids {
-    rd-card(id, cards: rd-data)
-    pagebreak(weak: true)
+#{
+    set page(width: auto, height: auto, margin: 4pt)
+    grid(
+        columns: 3, gutter: 3pt,
+        ..ot-demo-ids.map(id => ot-card(id, cards: ot-data)) + rd-demo-ids.map(id => rd-card(id, cards: rd-data)),
+    )
 }
+
+// #{
+//     set page(width: auto, height: auto, margin: 0pt)
+//     for id in ot-demo-ids {
+//         ot-card(id, cards: ot-data)
+//         pagebreak(weak: true)
+//     }
+//     for id in rd-demo-ids {
+//         rd-card(id, cards: rd-data)
+//         pagebreak(weak: true)
+//     }
+// }
