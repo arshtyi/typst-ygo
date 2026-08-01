@@ -68,7 +68,12 @@
             if model.pendulum { layout.image.pos.pendulum } else { layout.image.pos.normal },
             card-image(model.image, model.pendulum),
         )
-        image(assets + "frame/" + model.frame + ".png")
+        image(
+            assets + "frame/" + model.frame + ".png",
+            width: layout.card-size.width,
+            height: layout.card-size.height,
+            fit: "stretch",
+        )
         layer(layout.attribute-pos, image(
             assets + "attribute/" + model.attribute + ".png",
         ))

@@ -44,7 +44,12 @@
         set par(justify: true)
 
         layer(layout.image.pos, card-image(model.image))
-        image(assets + "frame/" + model.frame + ".png")
+        image(
+            assets + "frame/" + model.frame + ".png",
+            width: layout.card-size.width,
+            height: layout.card-size.height,
+            fit: "stretch",
+        )
         layer(layout.attribute-pos, image(
             assets + "attribute/" + model.attribute + ".png",
         ))
