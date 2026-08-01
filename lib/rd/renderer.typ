@@ -32,12 +32,11 @@
     "】"
 }
 
-#let render_card(model) = {
-    set page(
-        width: auto,
-        height: auto,
-        margin: 0pt,
-    )
+#let render_card(model) = block(
+    width: rd_layout.card_size.width,
+    height: rd_layout.card_size.height,
+    clip: true,
+    {
     set place(top + left)
     set text(
         lang: "zh",
@@ -193,5 +192,5 @@
         )
     }
 
-    pagebreak(weak: true)
-}
+    },
+)

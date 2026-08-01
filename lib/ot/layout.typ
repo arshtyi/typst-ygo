@@ -2,6 +2,7 @@
 #let to_pt(value) = value * 72pt / ppi
 
 #let ot_layout = (
+    card_size: (width: to_pt(1394), height: to_pt(2031)),
     image: (
         pos: (
             normal: (x: to_pt(169), y: to_pt(376)),

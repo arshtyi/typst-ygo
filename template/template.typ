@@ -1,5 +1,7 @@
 #import "../lib/mod.typ": ot_card_by_id, ot_card_data, rd_card_by_id, rd_card_data
 
+#set page(width: auto, height: auto, margin: 0pt)
+
 #let ot_cards = ot_card_data()
 #let rd_cards = rd_card_data()
 
@@ -17,6 +19,7 @@
 
 #for id in ot_demo_ids {
     ot_card_by_id(id, cards: ot_cards)
+    pagebreak(weak: true)
 }
 
 #let rd_demo_ids = (
@@ -33,4 +36,5 @@
 
 #for id in rd_demo_ids {
     rd_card_by_id(id, cards: rd_cards)
+    pagebreak(weak: true)
 }

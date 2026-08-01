@@ -2,6 +2,7 @@
 #let to_pt(value) = value * 72pt / ppi
 
 #let rd_layout = (
+    card_size: (width: to_pt(1393), height: to_pt(2031)),
     name_area: (
         start: (x: to_pt(60), y: to_pt(70)),
         end: (x: to_pt(1100), y: to_pt(170)),
