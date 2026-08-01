@@ -1,2 +1,7 @@
-#import "ot/data.typ": ot_card, ot_card_by_id, ot_card_data
-#import "rd/data.typ": rd_card, rd_card_by_id, rd_card_data
+#import "ot/mod.typ" as ot
+#import "rd/mod.typ" as rd
+
+#let ot-card = ot.card
+#let ot-cards = ot.cards
+#let rd-card = rd.card
+#let rd-cards = rd.cards

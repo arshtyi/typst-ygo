@@ -1,100 +1,100 @@
 #let ppi = 600
-#let to_pt(value) = value * 72pt / ppi
+#let to-pt(value) = value * 72pt / ppi
 
-#let ot_layout = (
-    card_size: (width: to_pt(1394), height: to_pt(2031)),
+#let layout = (
+    card-size: (width: to-pt(1394), height: to-pt(2031)),
     image: (
         pos: (
-            normal: (x: to_pt(169), y: to_pt(376)),
-            pendulum: (x: to_pt(95), y: to_pt(365)),
+            normal: (x: to-pt(169), y: to-pt(376)),
+            pendulum: (x: to-pt(95), y: to-pt(365)),
         ),
         size: (
-            normal: (width: to_pt(1055), height: to_pt(1053)),
+            normal: (width: to-pt(1055), height: to-pt(1053)),
             pendulum: (
-                width: to_pt(1205),
-                tall_height: to_pt(1546),
-                short_height: to_pt(900),
+                width: to-pt(1205),
+                tall-height: to-pt(1546),
+                short-height: to-pt(900),
             ),
         ),
     ),
-    attribute_pos: (
-        x: to_pt(1166),
-        y: to_pt(98),
+    attribute-pos: (
+        x: to-pt(1166),
+        y: to-pt(98),
     ),
-    name_area: (
-        start: (x: to_pt(100), y: to_pt(100)),
-        end: (x: to_pt(1160), y: to_pt(225)),
+    name-area: (
+        start: (x: to-pt(100), y: to-pt(100)),
+        end: (x: to-pt(1160), y: to-pt(225)),
     ),
-    scale_area: (
-        x: (left: to_pt(100), right: to_pt(1202)),
-        y: to_pt(1386),
+    scale-area: (
+        x: (left: to-pt(100), right: to-pt(1202)),
+        y: to-pt(1386),
     ),
-    password_pos: (
-        x: to_pt(66),
-        y: to_pt(1910),
+    password-pos: (
+        x: to-pt(66),
+        y: to-pt(1910),
     ),
-    race_pos: (
+    race-pos: (
         x: (
-            with_icon: to_pt(850),
-            without_icon: to_pt(890),
+            with-icon: to-pt(850),
+            without-icon: to-pt(890),
         ),
-        y: to_pt(245),
+        y: to-pt(245),
     ),
-    star_pos: (
+    star-pos: (
         x: (
-            up_to_twelve: (
-                to_pt(148),
-                to_pt(238),
-                to_pt(332),
-                to_pt(424),
-                to_pt(515),
-                to_pt(608),
-                to_pt(700),
-                to_pt(791),
-                to_pt(884),
-                to_pt(976),
-                to_pt(1067),
-                to_pt(1160),
+            up-to-twelve: (
+                to-pt(148),
+                to-pt(238),
+                to-pt(332),
+                to-pt(424),
+                to-pt(515),
+                to-pt(608),
+                to-pt(700),
+                to-pt(791),
+                to-pt(884),
+                to-pt(976),
+                to-pt(1067),
+                to-pt(1160),
             ),
-            over_twelve: (
-                start: to_pt(100),
-                end: to_pt(1280),
+            over-twelve: (
+                start: to-pt(100),
+                end: to-pt(1280),
             ),
         ),
-        y: to_pt(249),
+        y: to-pt(249),
     ),
-    bar_pos: (
-        x: to_pt(106),
-        y: to_pt(1848),
+    bar-pos: (
+        x: to-pt(106),
+        y: to-pt(1848),
     ),
-    atk_pos: (
-        x: to_pt(870),
-        y: to_pt(1856),
+    atk-pos: (
+        x: to-pt(870),
+        y: to-pt(1856),
     ),
-    def_pos: (
-        x: to_pt(1155),
-        y: to_pt(1856),
+    def-pos: (
+        x: to-pt(1155),
+        y: to-pt(1856),
     ),
-    link_value_pos: (
-        x: to_pt(1222),
-        y: to_pt(1856),
+    link-value-pos: (
+        x: to-pt(1222),
+        y: to-pt(1856),
     ),
-    link_marker_pos: (
-        (x: to_pt(117), y: to_pt(321)),
-        (x: to_pt(93), y: to_pt(773)),
-        (x: to_pt(117), y: to_pt(1352)),
-        (x: to_pt(572), y: to_pt(1428)),
-        (x: to_pt(1149), y: to_pt(1352)),
-        (x: to_pt(1223), y: to_pt(773)),
-        (x: to_pt(1149), y: to_pt(321)),
-        (x: to_pt(569), y: to_pt(298)),
+    link-marker-pos: (
+        (x: to-pt(117), y: to-pt(321)),
+        (x: to-pt(93), y: to-pt(773)),
+        (x: to-pt(117), y: to-pt(1352)),
+        (x: to-pt(572), y: to-pt(1428)),
+        (x: to-pt(1149), y: to-pt(1352)),
+        (x: to-pt(1223), y: to-pt(773)),
+        (x: to-pt(1149), y: to-pt(321)),
+        (x: to-pt(569), y: to-pt(298)),
     ),
-    pendulum_description_area: (
-        start: (x: to_pt(210), y: to_pt(1285)),
-        end: (x: to_pt(1180), y: to_pt(1495)),
+    pendulum-area: (
+        start: (x: to-pt(210), y: to-pt(1285)),
+        end: (x: to-pt(1180), y: to-pt(1495)),
     ),
-    description_area: (
-        start: (x: to_pt(104), y: to_pt(1530)),
-        end: (x: to_pt(1290), y: to_pt(1836)),
+    description-area: (
+        start: (x: to-pt(104), y: to-pt(1530)),
+        end: (x: to-pt(1290), y: to-pt(1836)),
     ),
 )

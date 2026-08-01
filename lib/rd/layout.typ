@@ -1,55 +1,55 @@
 #let ppi = 600
-#let to_pt(value) = value * 72pt / ppi
+#let to-pt(value) = value * 72pt / ppi
 
-#let rd_layout = (
-    card_size: (width: to_pt(1393), height: to_pt(2031)),
-    name_area: (
-        start: (x: to_pt(60), y: to_pt(70)),
-        end: (x: to_pt(1100), y: to_pt(170)),
+#let layout = (
+    card-size: (width: to-pt(1393), height: to-pt(2031)),
+    name-area: (
+        start: (x: to-pt(60), y: to-pt(70)),
+        end: (x: to-pt(1100), y: to-pt(170)),
     ),
-    attribute_pos: (
-        x: to_pt(1135),
-        y: to_pt(68),
+    attribute-pos: (
+        x: to-pt(1135),
+        y: to-pt(68),
     ),
-    legend_pos: (
-        x: to_pt(80),
-        y: to_pt(215),
+    legend-pos: (
+        x: to-pt(80),
+        y: to-pt(215),
     ),
     image: (
-        pos: (x: to_pt(70), y: to_pt(200)),
-        size: (width: to_pt(1258), height: to_pt(1258)),
+        pos: (x: to-pt(70), y: to-pt(200)),
+        size: (width: to-pt(1258), height: to-pt(1258)),
     ),
     level: (
-        pos: (x: to_pt(80), y: to_pt(1210)),
-        number_pos: (x: to_pt(80), y: to_pt(1280)),
+        pos: (x: to-pt(80), y: to-pt(1210)),
+        number-pos: (x: to-pt(80), y: to-pt(1280)),
     ),
-    typeline_area: (
-        start: (x: to_pt(90), y: to_pt(1470)),
-        end: (x: to_pt(1100), y: to_pt(1530)),
+    type-area: (
+        start: (x: to-pt(90), y: to-pt(1470)),
+        end: (x: to-pt(1100), y: to-pt(1530)),
     ),
-    typeline_icon_height: to_pt(60),
-    description_area: (
-        start: (x: to_pt(90), y: to_pt(1550)),
-        end: (x: to_pt(1300), y: to_pt(1880)),
+    type-icon-height: to-pt(60),
+    description-area: (
+        start: (x: to-pt(90), y: to-pt(1550)),
+        end: (x: to-pt(1300), y: to-pt(1880)),
     ),
-    password_pos: (
-        x: to_pt(75),
-        y: to_pt(1890),
+    password-pos: (
+        x: to-pt(75),
+        y: to-pt(1890),
     ),
-    bar_pos: (
-        x: to_pt(185),
-        y: to_pt(1350),
+    bar-pos: (
+        x: to-pt(185),
+        y: to-pt(1350),
     ),
-    atk_pos: (
-        x: to_pt(300),
-        y: to_pt(1348),
+    atk-pos: (
+        x: to-pt(300),
+        y: to-pt(1348),
     ),
-    def_pos: (
-        x: to_pt(745),
-        y: to_pt(1348),
+    def-pos: (
+        x: to-pt(745),
+        y: to-pt(1348),
     ),
-    maximum_atk: (
-        bar_pos: (x: to_pt(190), y: to_pt(1248)),
-        value_pos: (x: to_pt(730), y: to_pt(1245)),
+    maximum-atk: (
+        bar-pos: (x: to-pt(190), y: to-pt(1248)),
+        value-pos: (x: to-pt(730), y: to-pt(1245)),
     ),
 )
