@@ -1,9 +1,10 @@
-#import "../lib/mod.typ": ot_card_by_id, ot_card_data, rd_card_by_id, rd_card_data
+#import "../lib/mod.typ": ot-card, ot-cards, rd-card, rd-cards
 
-#let ot_cards = ot_card_data()
-#let rd_cards = rd_card_data()
 
-#let ot_demo_ids = (
+#let ot-data = ot-cards()
+#let rd-data = rd-cards()
+
+#let ot-demo-ids = (
     10000022,
     13332685,
     54701958,
@@ -14,12 +15,7 @@
     66518509,
     34298391,
 )
-
-#for id in ot_demo_ids {
-    ot_card_by_id(id, cards: ot_cards)
-}
-
-#let rd_demo_ids = (
+#let rd-demo-ids = (
     120293068,
     120231069,
     120257066,
@@ -31,6 +27,22 @@
     120155023,
 )
 
-#for id in rd_demo_ids {
-    rd_card_by_id(id, cards: rd_cards)
+#{
+    set page(width: auto, height: auto, margin: 4pt)
+    grid(
+        columns: 3, gutter: 3pt,
+        ..ot-demo-ids.map(id => ot-card(id, cards: ot-data)) + rd-demo-ids.map(id => rd-card(id, cards: rd-data)),
+    )
 }
+
+// #{
+//     set page(width: auto, height: auto, margin: 0pt)
+//     for id in ot-demo-ids {
+//         ot-card(id, cards: ot-data)
+//         pagebreak(weak: true)
+//     }
+//     for id in rd-demo-ids {
+//         rd-card(id, cards: rd-data)
+//         pagebreak(weak: true)
+//     }
+// }
