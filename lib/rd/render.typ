@@ -1,3 +1,4 @@
+#import "../utils/draw.typ": area, canvas, layer
 #import "../utils/text.typ": fit-text, fit-width
 #import "layout.typ": layout
 
@@ -31,12 +32,9 @@
     "】"
 }
 
-#let card(model) = block(
-    width: layout.card-size.width,
-    height: layout.card-size.height,
-    clip: true,
+#let card(model) = canvas(
+    layout.card-size,
     {
-        set place(top + left)
         set text(
             lang: "zh",
             region: "cn",
@@ -44,44 +42,34 @@
             overhang: false,
         )
         set par(justify: true)
-    
-        place(dx: layout.image.pos.x, dy: layout.image.pos.y, card-image(model.image))
+
+        layer(layout.image.pos, card-image(model.image))
         image(assets + "frame/" + model.frame + ".png")
-        place(dx: layout.attribute-pos.x, dy: layout.attribute-pos.y, image(
+        layer(layout.attribute-pos, image(
             assets + "attribute/" + model.attribute + ".png",
         ))
-    
-        place(
-            dx: layout.name-area.start.x,
-            dy: layout.name-area.start.y,
-            block(
-                width: layout.name-area.end.x - layout.name-area.start.x,
-                height: layout.name-area.end.y - layout.name-area.start.y,
-                inset: (x: 1pt, y: 3pt),
-                {
-                    set align(left + horizon)
-                    set text(
-                        font: fonts,
-                        size: 12pt,
-                        fill: black,
-                    )
-                    fit-width(min: 50%, model.name)
-                },
-            ),
+
+        area(
+            layout.name-area,
+            inset: (x: 1pt, y: 3pt),
+            {
+                set align(left + horizon)
+                set text(font: fonts, size: 12pt, fill: black)
+                fit-width(min: 50%, model.name)
+            },
         )
-    
+
         if model.legend {
-            place(dx: layout.legend-pos.x, dy: layout.legend-pos.y, image(assets + "legend/0.png"))
+            layer(layout.legend-pos, image(assets + "legend/0.png"))
         }
-    
+
         if model.monster {
             if model.maximum-atk != none {
-                place(dx: layout.maximum-atk.bar-pos.x, dy: layout.maximum-atk.bar-pos.y, image(
+                layer(layout.maximum-atk.bar-pos, image(
                     assets + "bar/1.png",
                 ))
-                place(
-                    dx: layout.maximum-atk.value-pos.x,
-                    dy: layout.maximum-atk.value-pos.y,
+                layer(
+                    layout.maximum-atk.value-pos,
                     block(
                         width: 50pt,
                         height: 12pt,
@@ -93,10 +81,9 @@
                     ),
                 )
             }
-            place(dx: layout.bar-pos.x, dy: layout.bar-pos.y, image(assets + "bar/0.png"))
-            place(
-                dx: layout.atk-pos.x,
-                dy: layout.atk-pos.y,
+            layer(layout.bar-pos, image(assets + "bar/0.png"))
+            layer(
+                layout.atk-pos,
                 block(
                     width: 48pt,
                     height: 12pt,
@@ -107,9 +94,8 @@
                     },
                 ),
             )
-            place(
-                dx: layout.def-pos.x,
-                dy: layout.def-pos.y,
+            layer(
+                layout.def-pos,
                 block(
                     width: 48pt,
                     height: 12pt,
@@ -120,14 +106,9 @@
                     },
                 ),
             )
-            place(
-                dx: layout.level.pos.x,
-                dy: layout.level.pos.y,
-                image(assets + "level/0.png"),
-            )
-            place(
-                dx: layout.level.number-pos.x,
-                dy: layout.level.number-pos.y,
+            layer(layout.level.pos, image(assets + "level/0.png"))
+            layer(
+                layout.level.number-pos,
                 block(
                     width: 24pt,
                     height: 18pt,
@@ -144,41 +125,30 @@
                 ),
             )
         }
-    
-        place(
-            dx: layout.type-area.start.x,
-            dy: layout.type-area.start.y,
-            block(
-                width: layout.type-area.end.x - layout.type-area.start.x,
-                height: layout.type-area.end.y - layout.type-area.start.y,
-                inset: (x: 1pt, y: 1pt),
-                {
-                    set align(left + horizon)
-                    set text(font: fonts, size: 6pt, fill: black)
-                    type-line(model)
-                },
-            ),
+
+        area(
+            layout.type-area,
+            inset: (x: 1pt, y: 1pt),
+            {
+                set align(left + horizon)
+                set text(font: fonts, size: 6pt, fill: black)
+                type-line(model)
+            },
         )
-    
-        place(
-            dx: layout.description-area.start.x,
-            dy: layout.description-area.start.y,
-            block(
-                width: layout.description-area.end.x - layout.description-area.start.x,
-                height: layout.description-area.end.y - layout.description-area.start.y,
-                inset: (x: 1pt, y: 1pt),
-                {
-                    set align(left)
-                    set text(font: fonts, size: 5pt, fill: black)
-                    fit-text(model.description)
-                },
-            ),
+
+        area(
+            layout.description-area,
+            inset: (x: 1pt, y: 1pt),
+            {
+                set align(left)
+                set text(font: fonts, size: 5pt, fill: black)
+                fit-text(model.description)
+            },
         )
-    
+
         if model.password {
-            place(
-                dx: layout.password-pos.x,
-                dy: layout.password-pos.y,
+            layer(
+                layout.password-pos,
                 block(
                     width: 70pt,
                     height: 10pt,
@@ -190,6 +160,6 @@
                 ),
             )
         }
-    
+
     },
 )

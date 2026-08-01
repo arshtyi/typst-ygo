@@ -1,3 +1,4 @@
+#import "../utils/draw.typ": area, canvas, layer
 #import "../utils/jpeg.typ": jpeg-size
 #import "../utils/text.typ": fit-effect, fit-width
 #import "layout.typ": layout
@@ -45,12 +46,9 @@
     image(path, width: target-width, height: target-height, fit: "stretch")
 }
 
-#let card(model) = block(
-    width: layout.card-size.width,
-    height: layout.card-size.height,
-    clip: true,
+#let card(model) = canvas(
+    layout.card-size,
     {
-        set place(top + left)
         set text(
             lang: "zh",
             region: "cn",
@@ -65,41 +63,34 @@
                 tracking: (min: -0.01em, max: 0.02em),
             ),
         )
-    
-        place(
-            dx: if model.pendulum { layout.image.pos.pendulum.x } else { layout.image.pos.normal.x },
-            dy: if model.pendulum { layout.image.pos.pendulum.y } else { layout.image.pos.normal.y },
+
+        layer(
+            if model.pendulum { layout.image.pos.pendulum } else { layout.image.pos.normal },
             card-image(model.image, model.pendulum),
         )
         image(assets + "frame/" + model.frame + ".png")
-        place(dx: layout.attribute-pos.x, dy: layout.attribute-pos.y, image(
+        layer(layout.attribute-pos, image(
             assets + "attribute/" + model.attribute + ".png",
         ))
-    
-        place(
-            dx: layout.name-area.start.x,
-            dy: layout.name-area.start.y,
-            block(
-                width: layout.name-area.end.x - layout.name-area.start.x,
-                height: layout.name-area.end.y - layout.name-area.start.y,
-                inset: (x: 1pt, y: 3pt),
-                {
-                    set align(left + horizon)
-                    set text(
-                        font: fonts,
-                        size: 10pt,
-                        fill: if model.xyz or model.spell or model.trap { white } else { black },
-                    )
-                    fit-width(min: 50%, model.name)
-                },
-            ),
+
+        area(
+            layout.name-area,
+            inset: (x: 1pt, y: 3pt),
+            {
+                set align(left + horizon)
+                set text(
+                    font: fonts,
+                    size: 10pt,
+                    fill: if model.xyz or model.spell or model.trap { white } else { black },
+                )
+                fit-width(min: 50%, model.name)
+            },
         )
-    
+
         if model.pendulum {
             for side in ("left", "right") {
-                place(
-                    dx: layout.scale-area.x.at(side),
-                    dy: layout.scale-area.y,
+                layer(
+                    (x: layout.scale-area.x.at(side), y: layout.scale-area.y),
                     block(
                         width: 11pt,
                         height: 12pt,
@@ -112,27 +103,21 @@
                     ),
                 )
             }
-    
-            place(
-                dx: layout.pendulum-area.start.x,
-                dy: layout.pendulum-area.start.y,
-                block(
-                    width: layout.pendulum-area.end.x - layout.pendulum-area.start.x,
-                    height: layout.pendulum-area.end.y - layout.pendulum-area.start.y,
-                    inset: (x: 1pt, y: 1pt),
-                    {
-                        set align(left)
-                        set text(font: fonts, size: 5pt, fill: black)
-                        fit-effect(4, model.pendulum-text, compact: model.compact)
-                    },
-                ),
+
+            area(
+                layout.pendulum-area,
+                inset: (x: 1pt, y: 1pt),
+                {
+                    set align(left)
+                    set text(font: fonts, size: 5pt, fill: black)
+                    fit-effect(4, model.pendulum-text, compact: model.compact)
+                },
             )
         }
-    
+
         if model.password {
-            place(
-                dx: layout.password-pos.x,
-                dy: layout.password-pos.y,
+            layer(
+                layout.password-pos,
                 block(
                     width: 32pt,
                     height: 10pt,
@@ -146,12 +131,14 @@
                 ),
             )
         }
-    
+
         if model.spell or model.trap {
             let has-icon = model.icon != none
-            place(
-                dx: if has-icon { layout.race-pos.x.with-icon } else { layout.race-pos.x.without-icon },
-                dy: layout.race-pos.y,
+            layer(
+                (
+                    x: if has-icon { layout.race-pos.x.with-icon } else { layout.race-pos.x.without-icon },
+                    y: layout.race-pos.y,
+                ),
                 block(
                     width: if has-icon { 50pt } else { 45pt },
                     height: 12pt,
@@ -172,54 +159,47 @@
                 ),
             )
         }
-    
+
         if model.monster {
             if model.link {
                 for marker in model.link-markers {
                     let pos = layout.link-marker-pos.at(marker)
-                    place(
-                        dx: pos.x,
-                        dy: pos.y,
-                        image(assets + "link/" + str(marker) + ".png"),
-                    )
+                    layer(pos, image(assets + "link/" + str(marker) + ".png"))
                 }
             } else {
                 let star-path = if model.xyz { assets + "rank/0.png" } else {
                     assets + "level/0.png"
                 }
-    
+
                 if model.level <= 12 {
                     for pos in range(model.level) {
                         let slot = if model.xyz { pos } else { 11 - pos }
-                        place(
-                            dx: layout.star-pos.x.up-to-twelve.at(slot),
-                            dy: layout.star-pos.y,
+                        layer(
+                            (x: layout.star-pos.x.up-to-twelve.at(slot), y: layout.star-pos.y),
                             image(star-path),
                         )
                     }
                 } else {
                     let width = layout.star-pos.x.over-twelve.end - layout.star-pos.x.over-twelve.start
                     let step = width / (13 - 1) - 0.72pt
-    
+
                     for pos in range(13) {
-                        place(
-                            dx: layout.star-pos.x.over-twelve.start + step * pos,
-                            dy: layout.star-pos.y,
+                        layer(
+                            (x: layout.star-pos.x.over-twelve.start + step * pos, y: layout.star-pos.y),
                             image(star-path),
                         )
                     }
                 }
             }
-    
-            place(dx: layout.bar-pos.x, dy: layout.bar-pos.y, image(if model.link {
+
+            layer(layout.bar-pos, image(if model.link {
                 assets + "bar/1.png"
             } else {
                 assets + "bar/0.png"
             }))
-    
-            place(
-                dx: layout.atk-pos.x,
-                dy: layout.atk-pos.y,
+
+            layer(
+                layout.atk-pos,
                 block(
                     width: 15pt,
                     height: 6pt,
@@ -231,11 +211,10 @@
                     },
                 ),
             )
-    
+
             if model.link {
-                place(
-                    dx: layout.link-value-pos.x,
-                    dy: layout.link-value-pos.y,
+                layer(
+                    layout.link-value-pos,
                     block(
                         width: 6pt,
                         height: 6pt,
@@ -248,9 +227,8 @@
                     ),
                 )
             } else {
-                place(
-                    dx: layout.def-pos.x,
-                    dy: layout.def-pos.y,
+                layer(
+                    layout.def-pos,
                     block(
                         width: 15pt,
                         height: 6pt,
@@ -264,21 +242,16 @@
                 )
             }
         }
-    
-        place(
-            dx: layout.description-area.start.x,
-            dy: layout.description-area.start.y,
-            block(
-                width: layout.description-area.end.x - layout.description-area.start.x,
-                height: layout.description-area.end.y - layout.description-area.start.y,
-                inset: (x: 1pt, y: 1pt),
-                {
-                    set align(left)
-                    set text(font: fonts, size: 5pt, fill: black)
-                    fit-effect(5, model.description, compact: model.compact)
-                },
-            ),
+
+        area(
+            layout.description-area,
+            inset: (x: 1pt, y: 1pt),
+            {
+                set align(left)
+                set text(font: fonts, size: 5pt, fill: black)
+                fit-effect(5, model.description, compact: model.compact)
+            },
         )
-    
+
     },
 )
