@@ -18,8 +18,7 @@
 )
 
 #for id in ot-demo-ids {
-    let fig = ot-card(id, cards: ot-data)
-    fig
+    ot-card(id, cards: ot-data)
     pagebreak(weak: true)
 }
 
@@ -36,7 +35,6 @@
 )
 
 #for id in rd-demo-ids {
-    let fig = rd-card(id, cards: rd-data)
-    fig
+    rd-card(id, cards: rd-data)
     pagebreak(weak: true)
 }
