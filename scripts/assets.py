@@ -440,13 +440,13 @@ def sync_demo_images(root: Path, template: Path, dry_run: bool, force: bool, cle
     image_sets = (
         ImageSet(
             name="OT",
-            demo_ids_variable="ot_demo_ids",
+            demo_ids_variable="ot-demo-ids",
             cards_json=resolve_under_root(root, Path("assets/ot/card/ot.json")),
             images_dir=resolve_under_root(root, Path("assets/ot/images")),
         ),
         ImageSet(
             name="RD",
-            demo_ids_variable="rd_demo_ids",
+            demo_ids_variable="rd-demo-ids",
             cards_json=resolve_under_root(root, Path("assets/rd/card/rd.json")),
             images_dir=resolve_under_root(root, Path("assets/rd/images")),
         ),
