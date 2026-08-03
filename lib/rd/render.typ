@@ -151,7 +151,7 @@
                     height: 6pt,
                     {
                         set align(left + horizon)
-                        set text(font: "FOT-Rodin Pro M", size: 6pt, fill: white)
+                        set text(font: "FOT-Rodin Pro", size: 6pt, fill: white)
                         str(model.id)
                     },
                 ),
