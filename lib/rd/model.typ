@@ -63,7 +63,7 @@
     card.description
 }
 
-#let build(card, compact: true, password: true) = {
+#let build(card, compact: true, password: true, fullwidth-slash: false) = {
     let monster = has-type(card, "怪兽")
     let spell = has-type(card, "魔法")
     let trap = has-type(card, "陷阱")
@@ -89,5 +89,6 @@
         legend: card.legend,
         maximum-atk: card.at("maximumAtk", default: none),
         password: password,
+        fullwidth-slash: fullwidth-slash,
     )
 }

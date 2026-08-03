@@ -22,11 +22,11 @@
         y: to-pt(98),
     ),
     name-area: (
-        start: (x: to-pt(100), y: to-pt(100)),
+        start: (x: to-pt(90), y: to-pt(100)),
         end: (x: to-pt(1160), y: to-pt(225)),
     ),
-    scale-area: (
-        x: (left: to-pt(100), right: to-pt(1202)),
+    pendulum-scale-area: (
+        x: (left: to-pt(95), right: to-pt(1200)),
         y: to-pt(1386),
     ),
     password-pos: (
@@ -89,12 +89,16 @@
         (x: to-pt(1149), y: to-pt(321)),
         (x: to-pt(569), y: to-pt(298)),
     ),
-    pendulum-area: (
+    pendulum-description-area: (
         start: (x: to-pt(210), y: to-pt(1285)),
         end: (x: to-pt(1180), y: to-pt(1495)),
     ),
-    description-area: (
-        start: (x: to-pt(104), y: to-pt(1530)),
+    monster-description-area: (
+        start: (x: to-pt(104), y: to-pt(1540)),
         end: (x: to-pt(1290), y: to-pt(1836)),
+    ),
+    spell-or-trap-description-area: (
+        start: (x: to-pt(104), y: to-pt(1540)),
+        end: (x: to-pt(1290), y: to-pt(1890)),
     ),
 )

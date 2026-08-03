@@ -80,7 +80,6 @@
 
         area(
             layout.name-area,
-            inset: (x: 1pt, y: 3pt),
             {
                 set align(left + horizon)
                 set text(
@@ -95,11 +94,10 @@
         if model.pendulum {
             for side in ("left", "right") {
                 layer(
-                    (x: layout.scale-area.x.at(side), y: layout.scale-area.y),
+                    (x: layout.pendulum-scale-area.x.at(side), y: layout.pendulum-scale-area.y),
                     block(
-                        width: 11pt,
+                        width: 12pt,
                         height: 12pt,
-                        inset: (x: 1pt, y: 3pt),
                         {
                             set align(center + horizon)
                             set text(font: "Yu-Gi-Oh! Matrix", size: 10pt, fill: black)
@@ -110,7 +108,7 @@
             }
 
             area(
-                layout.pendulum-area,
+                layout.pendulum-description-area,
                 inset: (x: 1pt, y: 1pt),
                 {
                     set align(left)
@@ -128,9 +126,11 @@
                     height: 10pt,
                     {
                         set align(left + horizon)
-                        set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 4.71pt, fill: if model.xyz { white } else {
-                            black
-                        })
+                        set text(
+                            font: "Yu-Gi-Oh! ITC Stone Serif M",
+                            size: 4.71pt,
+                            fill: if model.xyz { white } else { black },
+                        )
                         pad-number(model.id, 8)
                     },
                 ),
@@ -208,7 +208,6 @@
                 block(
                     width: 15pt,
                     height: 6pt,
-                    inset: (x: 1pt, y: 1pt),
                     {
                         set align(right + horizon)
                         set text(font: "Yu-Gi-Oh! Matrix", size: 7pt, fill: black)
@@ -223,7 +222,6 @@
                     block(
                         width: 6pt,
                         height: 6pt,
-                        inset: (x: 1pt, y: 1pt),
                         {
                             set align(center + horizon)
                             set text(font: "Yu-Gi-Oh! Ro GSan Serif Std B", size: 5.2pt, fill: black)
@@ -237,7 +235,6 @@
                     block(
                         width: 15pt,
                         height: 6pt,
-                        inset: (x: 1pt, y: 1pt),
                         {
                             set align(right + horizon)
                             set text(font: "Yu-Gi-Oh! Matrix", size: 7pt, fill: black)
@@ -249,14 +246,12 @@
         }
 
         area(
-            layout.description-area,
-            inset: (x: 1pt, y: 1pt),
+            if model.monster { layout.monster-description-area } else { layout.spell-or-trap-description-area },
             {
                 set align(left)
                 set text(font: fonts, size: 5pt, fill: black)
                 fit-effect(5, model.description, compact: model.compact)
             },
         )
-
     },
 )

@@ -35,14 +35,14 @@
     )
 }
 
-// #{
-//     set page(width: auto, height: auto, margin: 0pt)
-//     for id in ot-demo-ids {
-//         ot-card(id, cards: ot-data)
-//         pagebreak(weak: true)
-//     }
-//     for id in rd-demo-ids {
-//         rd-card(id, cards: rd-data)
-//         pagebreak(weak: true)
-//     }
-// }
+#{
+    set page(width: auto, height: auto, margin: 0pt)
+    for id in ot-demo-ids {
+        ot-card(id, cards: ot-data)
+        pagebreak(weak: true)
+    }
+    for id in rd-demo-ids {
+        rd-card(id, cards: rd-data)
+        pagebreak(weak: true)
+    }
+}

@@ -86,13 +86,14 @@
     card.at("level", default: 0)
 }
 
-#let description(card) = if has-type(card, "怪兽") {
-    "【" + card.type.slice(1).join("/") + "】\n" + card.description
+#let description(card, fullwidth-slash) = if has-type(card, "怪兽") {
+    let slash = if fullwidth-slash { "／" } else { "/" }
+    "【" + card.type.slice(1).join(slash) + "】\n" + card.description
 } else {
     card.description
 }
 
-#let build(card, compact: true, password: true) = {
+#let build(card, compact: true, password: true, fullwidth-slash: false) = {
     let monster = has-type(card, "怪兽")
     let spell = has-type(card, "魔法")
     let trap = has-type(card, "陷阱")
@@ -102,7 +103,7 @@
     (
         id: card.id,
         name: card.name,
-        description: description(card),
+        description: description(card, fullwidth-slash),
         frame: frame(card),
         attribute: attribute(card),
         image: card.image,

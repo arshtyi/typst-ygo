@@ -4,7 +4,7 @@
 
 #let cards = data.load
 
-#let card(source, cards: none, compact: true, password: true) = {
+#let card(source, cards: none, compact: true, password: true, fullwidth-slash: false) = {
     let value = if type(source) == dictionary {
         source
     } else {
@@ -12,5 +12,10 @@
         data.find(source, if cards == none { data.load() } else { cards })
     }
 
-    render.card(model.build(value, compact: compact, password: password))
+    render.card(model.build(
+        value,
+        compact: compact,
+        password: password,
+        fullwidth-slash: fullwidth-slash,
+    ))
 }

@@ -15,10 +15,11 @@
 )
 
 #let type-line(model) = {
+    let slash = if model.fullwidth-slash { "／" } else { "/" }
     "【"
     for (index, part) in model.type-parts.enumerate() {
         if index > 0 {
-            "/"
+            slash
         }
         part
         let icon = model.type-icons.at(index, default: none)
@@ -56,10 +57,9 @@
 
         area(
             layout.name-area,
-            inset: (x: 1pt, y: 3pt),
             {
                 set align(left + horizon)
-                set text(font: fonts, size: 12pt, fill: black)
+                set text(font: fonts, size: 14pt, fill: black)
                 fit-width(min: 50%, model.name)
             },
         )
@@ -76,11 +76,11 @@
                 layer(
                     layout.maximum-atk.value-pos,
                     block(
-                        width: 50pt,
+                        width: 30pt,
                         height: 12pt,
                         {
                             set align(right + horizon)
-                            set text(font: "Yu-Gi-Oh! Ro GSan Serif Std B", size: 8pt, fill: white)
+                            set text(font: "Yu-Gi-oh(RD)-Number", size: 12pt, fill: white, tracking: -1pt)
                             stat-text(model.maximum-atk)
                         },
                     ),
@@ -90,11 +90,11 @@
             layer(
                 layout.atk-pos,
                 block(
-                    width: 48pt,
+                    width: 30pt,
                     height: 12pt,
                     {
                         set align(right + horizon)
-                        set text(font: "Yu-Gi-Oh! Ro GSan Serif Std B", size: 8pt, fill: white)
+                        set text(font: "Yu-Gi-oh(RD)-Number", size: 12pt, fill: white, tracking: -1pt)
                         stat-text(model.atk)
                     },
                 ),
@@ -102,11 +102,11 @@
             layer(
                 layout.def-pos,
                 block(
-                    width: 48pt,
+                    width: 30pt,
                     height: 12pt,
                     {
                         set align(right + horizon)
-                        set text(font: "Yu-Gi-Oh! Ro GSan Serif Std B", size: 8pt, fill: white)
+                        set text(font: "Yu-Gi-oh(RD)-Number", size: 12pt, fill: white, tracking: -1pt)
                         stat-text(model.def)
                     },
                 ),
@@ -115,17 +115,10 @@
             layer(
                 layout.level.number-pos,
                 block(
-                    width: 24pt,
-                    height: 18pt,
+                    width: 17pt,
                     {
                         set align(center + horizon)
-                        set text(
-                            font: "Yu-Gi-Oh! Ro GSan Serif Std B",
-                            size: 10pt,
-                            fill: white,
-                            tracking: -2pt,
-                        )
-                        str(model.level)
+                        image(assets + "level/" + str(model.level) + ".png")
                     },
                 ),
             )
@@ -133,7 +126,7 @@
 
         area(
             layout.type-area,
-            inset: (x: 1pt, y: 1pt),
+            inset: (x: 0pt, y: 1pt),
             {
                 set align(left + horizon)
                 set text(font: fonts, size: 6pt, fill: black)
@@ -143,7 +136,6 @@
 
         area(
             layout.description-area,
-            inset: (x: 1pt, y: 1pt),
             {
                 set align(left)
                 set text(font: fonts, size: 5pt, fill: black)
@@ -155,16 +147,15 @@
             layer(
                 layout.password-pos,
                 block(
-                    width: 70pt,
-                    height: 10pt,
+                    width: 50pt,
+                    height: 6pt,
                     {
                         set align(left + horizon)
-                        set text(font: "Yu-Gi-Oh! ITC Stone Serif M", size: 6pt, fill: white)
+                        set text(font: "FOT-Rodin Pro M", size: 6pt, fill: white)
                         str(model.id)
                     },
                 ),
             )
         }
-
     },
 )
