@@ -21,6 +21,10 @@
         x: to-pt(1166),
         y: to-pt(98),
     ),
+    limit-pos: (
+        x: to-pt(-5),
+        y: to-pt(-5),
+    ),
     name-area: (
         start: (x: to-pt(90), y: to-pt(100)),
         end: (x: to-pt(1160), y: to-pt(225)),

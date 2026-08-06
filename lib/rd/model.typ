@@ -63,12 +63,16 @@
     card.description
 }
 
-#let build(card, compact: true, password: true, fullwidth-slash: false) = {
+#let build(card, compact: true, password: true, fullwidth-slash: false, limit: none) = {
     let monster = has-type(card, "怪兽")
     let spell = has-type(card, "魔法")
     let trap = has-type(card, "陷阱")
 
     assert(monster or spell or trap, message: "RD card type must include 怪兽, 魔法, or 陷阱")
+    assert(
+        limit == none or (type(limit) == int and limit in range(3)),
+        message: "RD limit must be none or an integer from 0 to 2",
+    )
     let parts = type-parts(card)
 
     (
@@ -89,6 +93,7 @@
         legend: card.legend,
         maximum-atk: card.at("maximumAtk", default: none),
         password: password,
+        limit: limit,
         fullwidth-slash: fullwidth-slash,
     )
 }

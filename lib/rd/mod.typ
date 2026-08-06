@@ -4,7 +4,7 @@
 
 #let cards = data.load
 
-#let card(source, cards: none, compact: true, password: true, fullwidth-slash: false) = {
+#let card(source, cards: none, compact: true, password: true, fullwidth-slash: false, limit: none) = {
     let value = if type(source) == dictionary {
         source
     } else {
@@ -17,5 +17,6 @@
         compact: compact,
         password: password,
         fullwidth-slash: fullwidth-slash,
+        limit: limit,
     ))
 }

@@ -11,6 +11,10 @@
         x: to-pt(1136),
         y: to-pt(67),
     ),
+    limit-pos: (
+        x: to-pt(-5),
+        y: to-pt(-5),
+    ),
     legend-pos: (
         x: to-pt(75),
         y: to-pt(205),

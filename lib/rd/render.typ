@@ -51,6 +51,13 @@
             height: layout.card-size.height,
             fit: "stretch",
         )
+        if model.limit != none {
+            layer(layout.limit-pos, image(
+                assets + "lf/" + str(model.limit) + ".png",
+                width: 12pt,
+                height: 12pt,
+            ))
+        }
         layer(layout.attribute-pos, image(
             assets + "attribute/" + model.attribute + ".png",
         ))

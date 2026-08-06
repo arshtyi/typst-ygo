@@ -1,6 +1,7 @@
 {
   "tinymist.fontPaths": [
-    "./assets/ot/font",
-    "./assets/rd/font"
-  ]
+    "${workspaceFolder}/assets/ot/font",
+    "${workspaceFolder}/assets/rd/font"
+  ],
+  "tinymist.systemFonts": false
 }

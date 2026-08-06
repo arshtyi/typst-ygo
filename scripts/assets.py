@@ -27,9 +27,11 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
-OT_DATA_URL = "https://github.com/arshtyi/ygo-cards/releases/download/latest/ot.json"
-RD_DATA_URL = "https://github.com/arshtyi/ygo-cards/releases/download/latest/rd.json"
-ASSETS_ARCHIVE_URL = "https://github.com/arshtyi/ygo-assets/releases/download/latest/assets.tar.xz"
+OT_DATA_URL = "https://github.com/arshtyi/ygo-cards/releases/latest/download/ot.json"
+RD_DATA_URL = "https://github.com/arshtyi/ygo-cards/releases/latest/download/rd.json"
+ASSETS_ARCHIVE_URL = (
+    "https://github.com/arshtyi/ygo-assets/releases/latest/download/assets.tar.xz"
+)
 IMAGE_URL = "https://images.ygoprodeck.com/images/cards_cropped/{image_id}.jpg"
 USER_AGENT = "typst-ygo-assets/1.0"
 ASSETS_ARCHIVE_ROOTS = frozenset(("ot", "rd", "readme.md"))
@@ -102,7 +104,9 @@ def parse_args() -> argparse.Namespace:
 
 def find_repo_root(start: Path) -> Path:
     for candidate in (start, *start.parents):
-        if (candidate / "template" / "template.typ").is_file() and (candidate / "lib" / "mod.typ").is_file():
+        if (candidate / "template" / "template.typ").is_file() and (
+            candidate / "lib" / "mod.typ"
+        ).is_file():
             return candidate
     raise RuntimeError("could not auto-detect repository root")
 
@@ -146,10 +150,14 @@ def download_to_temp(url: str, directory: Path, timeout: float) -> Path:
                 shutil.copyfileobj(response, temp)
     except HTTPError as exc:
         temp_path.unlink(missing_ok=True)
-        raise RuntimeError(f"HTTP {exc.code} while downloading {url}: {exc.reason}") from exc
+        raise RuntimeError(
+            f"HTTP {exc.code} while downloading {url}: {exc.reason}"
+        ) from exc
     except URLError as exc:
         temp_path.unlink(missing_ok=True)
-        raise RuntimeError(f"network error while downloading {url}: {exc.reason}") from exc
+        raise RuntimeError(
+            f"network error while downloading {url}: {exc.reason}"
+        ) from exc
     except OSError as exc:
         temp_path.unlink(missing_ok=True)
         raise RuntimeError(f"file error while downloading {url}: {exc}") from exc
@@ -160,7 +168,9 @@ def download_to_temp(url: str, directory: Path, timeout: float) -> Path:
     return temp_path
 
 
-def download_json_resource(resource: DataResource, timeout: float, dry_run: bool) -> None:
+def download_json_resource(
+    resource: DataResource, timeout: float, dry_run: bool
+) -> None:
     print(f"{resource.name}:")
     print(f"  download {resource.url} -> {resource.destination}")
     if dry_run:
@@ -173,10 +183,14 @@ def download_json_resource(resource: DataResource, timeout: float, dry_run: bool
         temp_path.replace(resource.destination)
     except json.JSONDecodeError as exc:
         temp_path.unlink(missing_ok=True)
-        raise RuntimeError(f"downloaded JSON is invalid for {resource.name}: {exc}") from exc
+        raise RuntimeError(
+            f"downloaded JSON is invalid for {resource.name}: {exc}"
+        ) from exc
     except OSError as exc:
         temp_path.unlink(missing_ok=True)
-        raise RuntimeError(f"file error while writing {resource.destination}: {exc}") from exc
+        raise RuntimeError(
+            f"file error while writing {resource.destination}: {exc}"
+        ) from exc
 
 
 def archive_target_path(assets_dir: Path, member_name: str) -> Path | None:
@@ -191,7 +205,9 @@ def archive_target_path(assets_dir: Path, member_name: str) -> Path | None:
     if any(part == ".." for part in parts):
         raise RuntimeError(f"archive member escapes assets directory: {member_name}")
     if any(":" in part for part in parts):
-        raise RuntimeError(f"archive member contains invalid path segment: {member_name}")
+        raise RuntimeError(
+            f"archive member contains invalid path segment: {member_name}"
+        )
     if parts[0] not in ASSETS_ARCHIVE_ROOTS:
         raise RuntimeError(f"archive member has unexpected root: {member_name}")
     if parts[0] == "readme.md" and len(parts) != 1:
@@ -201,7 +217,9 @@ def archive_target_path(assets_dir: Path, member_name: str) -> Path | None:
     try:
         target.relative_to(assets_dir)
     except ValueError as exc:
-        raise RuntimeError(f"archive member escapes assets directory: {member_name}") from exc
+        raise RuntimeError(
+            f"archive member escapes assets directory: {member_name}"
+        ) from exc
     return target
 
 
@@ -242,7 +260,9 @@ def extract_assets_archive(archive_path: Path, assets_dir: Path) -> int:
                 temp_path.replace(target)
             except OSError as exc:
                 temp_path.unlink(missing_ok=True)
-                raise RuntimeError(f"file error while extracting {target}: {exc}") from exc
+                raise RuntimeError(
+                    f"file error while extracting {target}: {exc}"
+                ) from exc
             extracted += 1
 
     return extracted
@@ -289,7 +309,9 @@ def download_assets(root: Path, timeout: float, dry_run: bool) -> None:
 
 
 def extract_demo_ids(template_text: str, variable_name: str) -> list[int]:
-    pattern = re.compile(rf"#let\s+{re.escape(variable_name)}\s*=\s*\((?P<body>.*?)\)", re.DOTALL)
+    pattern = re.compile(
+        rf"#let\s+{re.escape(variable_name)}\s*=\s*\((?P<body>.*?)\)", re.DOTALL
+    )
     match = pattern.search(template_text)
     if match is None:
         raise RuntimeError(f"could not find Typst tuple: {variable_name}")
@@ -336,7 +358,9 @@ def image_id_for(card: dict[str, object]) -> int | None:
     return None
 
 
-def required_images(card_index: dict[int, dict[str, object]], demo_ids: list[int]) -> tuple[set[int], list[str]]:
+def required_images(
+    card_index: dict[int, dict[str, object]], demo_ids: list[int]
+) -> tuple[set[int], list[str]]:
     image_ids: set[int] = set()
     warnings: list[str] = []
 
@@ -356,7 +380,9 @@ def required_images(card_index: dict[int, dict[str, object]], demo_ids: list[int
     return image_ids, warnings
 
 
-def download_image(image_id: int, destination: Path, timeout: float, dry_run: bool) -> bool:
+def download_image(
+    image_id: int, destination: Path, timeout: float, dry_run: bool
+) -> bool:
     url = IMAGE_URL.format(image_id=image_id)
     if dry_run:
         print(f"  download {url} -> {destination}")
@@ -399,7 +425,14 @@ def clean_extra_jpgs(images_dir: Path, expected_names: set[str], dry_run: bool) 
     return removed
 
 
-def sync_image_set(image_set: ImageSet, template_text: str, dry_run: bool, force: bool, clean: bool, timeout: float) -> int:
+def sync_image_set(
+    image_set: ImageSet,
+    template_text: str,
+    dry_run: bool,
+    force: bool,
+    clean: bool,
+    timeout: float,
+) -> int:
     print(f"{image_set.name}:")
 
     demo_ids = extract_demo_ids(template_text, image_set.demo_ids_variable)
@@ -426,14 +459,18 @@ def sync_image_set(image_set: ImageSet, template_text: str, dry_run: bool, force
             failures += 1
 
     if clean and warnings:
-        print("  skip cleanup because card/image mapping is incomplete", file=sys.stderr)
+        print(
+            "  skip cleanup because card/image mapping is incomplete", file=sys.stderr
+        )
     elif clean:
         clean_extra_jpgs(image_set.images_dir, expected_names, dry_run)
 
     return failures
 
 
-def sync_demo_images(root: Path, template: Path, dry_run: bool, force: bool, clean: bool, timeout: float) -> int:
+def sync_demo_images(
+    root: Path, template: Path, dry_run: bool, force: bool, clean: bool, timeout: float
+) -> int:
     template_path = resolve_under_root(root, template)
     template_text = read_text(template_path)
 

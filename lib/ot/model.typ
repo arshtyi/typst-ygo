@@ -93,12 +93,16 @@
     card.description
 }
 
-#let build(card, compact: true, password: true, fullwidth-slash: false) = {
+#let build(card, compact: true, password: true, fullwidth-slash: false, limit: none) = {
     let monster = has-type(card, "怪兽")
     let spell = has-type(card, "魔法")
     let trap = has-type(card, "陷阱")
 
     assert(monster or spell or trap, message: "OT card type must include 怪兽, 魔法, or 陷阱")
+    assert(
+        limit == none or (type(limit) == int and limit in range(3)),
+        message: "OT limit must be none or an integer from 0 to 2",
+    )
 
     (
         id: card.id,
@@ -121,6 +125,7 @@
         pendulum-text: card.at("pendulumDescription", default: none),
         compact: compact,
         password: password,
+        limit: limit,
         icon: spell-trap-icon(card),
         scale: card.at("pendulumScale", default: none),
     )
